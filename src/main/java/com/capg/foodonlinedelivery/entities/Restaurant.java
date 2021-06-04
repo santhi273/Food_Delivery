@@ -1,5 +1,6 @@
 package com.capg.foodonlinedelivery.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,9 +21,8 @@ private Integer restaurantId;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinTable(name="address_id")
 	private Address address;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="Restaurant_Items",joinColumns = { @JoinColumn(name = "restaurant_id") }, inverseJoinColumns = { @JoinColumn(name = "item_id") })
-	private List<Items> itemList;
+	@ManyToMany(cascade = CascadeType.ALL,mappedBy="restaurant")
+	private List<Items> itemList=new ArrayList<>();
 	
 	public Restaurant() {
 		super();

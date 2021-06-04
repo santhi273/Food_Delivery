@@ -1,11 +1,13 @@
 package com.capg.foodonlinedelivery.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -20,8 +22,9 @@ private String itemName;
 private Category category;
 private Integer quantity;
 private double cost;
-@ManyToMany(fetch=FetchType.LAZY,mappedBy="Restaurant")
-private List<Restaurant> restaurant;
+@ManyToMany(fetch=FetchType.LAZY)
+@JoinTable(name="Items_Restaurant",joinColumns = { @JoinColumn(name = "item_id") }, inverseJoinColumns = { @JoinColumn(name = "restaurant_id") })
+private List<Restaurant> restaurant=new ArrayList<>();
 
 
 

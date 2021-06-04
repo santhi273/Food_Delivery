@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 
 @Entity
 public class OrderDetails {
+@Id
 private Integer orderId;
 private LocalDateTime orderDate;
 @OneToOne(cascade=CascadeType.ALL)
