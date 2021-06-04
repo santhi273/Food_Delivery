@@ -6,21 +6,18 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import com.capg.foodonlinedelivery.entities.Customer;
+import com.capg.foodonlinedelivery.entities.Items;
 
 public class FoodCartDTO {
 	
     private String cartId;
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="item_id")
-    private List<Items> itemList;
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinTable(name="customer_id")
+    private List<ItemsDTO> itemList;
     private Customer customer;
 	
 	public FoodCartDTO() {
 		super();
 	}
-	public FoodCartDTO(String cartId, List<Items> itemList, Customer customer) {
+	public FoodCartDTO(String cartId, List<ItemsDTO> itemList, Customer customer) {
 		super();
 		this.cartId = cartId;
 		this.itemList = itemList;
@@ -32,10 +29,10 @@ public class FoodCartDTO {
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
-	public List<Items> getItemList() {
+	public List<ItemsDTO> getItemList() {
 		return itemList;
 	}
-	public void setItemList(List<Items> itemList) {
+	public void setItemList(List<ItemsDTO> itemList) {
 		this.itemList = itemList;
 	}
 	public Customer getCustomer() {

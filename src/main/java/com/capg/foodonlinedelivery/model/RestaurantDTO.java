@@ -17,10 +17,7 @@ private Integer restaurantId;
 	private String restaurantName;
 	private String managerName;
 	private long phoneNumber;
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinTable(name="address_id")
 	private Address address;
-	@ManyToMany(cascade = CascadeType.ALL,mappedBy="restaurant")
 	private List<Items> itemList=new ArrayList<>();
 	
 	public RestaurantDTO() {

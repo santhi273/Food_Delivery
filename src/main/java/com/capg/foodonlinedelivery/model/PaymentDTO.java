@@ -11,9 +11,7 @@ public class PaymentDTO {
 
 private String paymentId;
 private LocalDateTime paymentDate;
-@OneToOne(cascade=CascadeType.ALL)
-@JoinTable(name="order_id")
-private OrderDetails order;
+private OrderDetailsDTO order;
 private Integer totalItem;
 private Double totalCost;
 
@@ -23,7 +21,7 @@ private Double totalCost;
 public PaymentDTO() {
 	super();
 }
-public PaymentDTO(String paymentId, LocalDateTime paymentDate, OrderDetails order, Integer totalItem, Double totalCost) {
+public PaymentDTO(String paymentId, LocalDateTime paymentDate, OrderDetailsDTO order, Integer totalItem, Double totalCost) {
 	super();
 	this.paymentId = paymentId;
 	this.paymentDate = paymentDate;
@@ -43,10 +41,10 @@ public LocalDateTime getPaymentDate() {
 public void setPaymentDate(LocalDateTime paymentDate) {
 	this.paymentDate = paymentDate;
 }
-public OrderDetails getOrder() {
+public OrderDetailsDTO getOrder() {
 	return order;
 }
-public void setOrder(OrderDetails order) {
+public void setOrder(OrderDetailsDTO order) {
 	this.order = order;
 }
 public Integer getTotalItem() {

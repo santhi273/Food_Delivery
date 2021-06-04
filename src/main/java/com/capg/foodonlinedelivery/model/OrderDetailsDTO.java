@@ -13,15 +13,13 @@ public class OrderDetailsDTO {
 	
 private Integer orderId;
 private LocalDateTime orderDate;
-@OneToOne(cascade=CascadeType.ALL)
-@JoinTable(name="cart_id")
-private FoodCart cart;
+private FoodCartDTO cart;
 private String orderStatus;
 
 public OrderDetailsDTO() {
 	super();
 }
-public OrderDetailsDTO(Integer orderId, LocalDateTime orderDate, FoodCart cart, String orderStatus) {
+public OrderDetailsDTO(Integer orderId, LocalDateTime orderDate, FoodCartDTO cart, String orderStatus) {
 	super();
 	this.orderId = orderId;
 	this.orderDate = orderDate;
@@ -40,10 +38,10 @@ public LocalDateTime getOrderDate() {
 public void setOrderDate(LocalDateTime orderDate) {
 	this.orderDate = orderDate;
 }
-public FoodCart getCart() {
+public FoodCartDTO getCart() {
 	return cart;
 }
-public void setCart(FoodCart cart) {
+public void setCart(FoodCartDTO cart) {
 	this.cart = cart;
 }
 public String getOrderStatus() {

@@ -10,19 +10,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import com.capg.foodonlinedelivery.entities.Category;
+import com.capg.foodonlinedelivery.entities.Restaurant;
 
 public class ItemsDTO {
 
 private Integer itemId;
 private String itemName;
-@OneToOne(cascade=CascadeType.ALL)
-@JoinTable(name="category_id")
 private Category category;
 private Integer quantity;
 private double cost;
-@ManyToMany(fetch=FetchType.LAZY)
-@JoinTable(name="Items_Restaurant",joinColumns = { @JoinColumn(name = "item_id") }, inverseJoinColumns = { @JoinColumn(name = "restaurant_id") })
-private List<Restaurant> restaurant=new ArrayList<>();
+private List<RestaurantDTO> restaurant=new ArrayList<>();
 
 
 
@@ -30,7 +27,7 @@ public ItemsDTO() {
 	super();
 }
 public ItemsDTO(Integer itemId, String itemName, Category category, Integer quantity, double cost,
-		List<Restaurant> restaurant) {
+		List<RestaurantDTO> restaurant) {
 	super();
 	this.itemId = itemId;
 	this.itemName = itemName;
@@ -69,10 +66,10 @@ public double getCost() {
 public void setCost(double cost) {
 	this.cost = cost;
 }
-public List<Restaurant> getRestaurant() {
+public List<RestaurantDTO> getRestaurant() {
 	return restaurant;
 }
-public void setRestaurant(List<Restaurant> restaurant) {
+public void setRestaurant(List<RestaurantDTO> restaurant) {
 	this.restaurant = restaurant;
 }
 
