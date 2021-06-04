@@ -37,7 +37,7 @@ public class CategoryServiceImplement implements ICategoryService {
 
 	@Override
 	public List<Category> viewAllCategory() {
-		List<Category> list=new ArrayList();
+		List<Category> list = new ArrayList();
 			list=	repo.findAll();
 		return list;
 	}

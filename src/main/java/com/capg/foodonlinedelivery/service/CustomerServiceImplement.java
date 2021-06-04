@@ -41,7 +41,7 @@ public class CustomerServiceImplement implements ICustomerService {
 	@Override
 	public Customer viewCustomerById(int customerId) {
 		
-		return repo.findById(customerId);
+		return  repo.findById(customerId);
 	}
 
 
