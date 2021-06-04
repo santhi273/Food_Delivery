@@ -1,11 +1,7 @@
 package com.capg.foodonlinedelivery.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
-public class Address {
-	@Id
+public class AddressDTO {
+	
 private String addressId;
 private String city;
 private Integer dNo;
@@ -14,10 +10,10 @@ private String area;
 private String state;
 private String country;
 
-public Address() {
+public AddressDTO() {
 	super();
 }
-public Address(String addressId, String city, Integer dNo, Long pinCode, String area, String state, String country) {
+public AddressDTO(String addressId, String city, Integer dNo, Long pinCode, String area, String state, String country) {
 	super();
 	this.addressId = addressId;
 	this.city = city;

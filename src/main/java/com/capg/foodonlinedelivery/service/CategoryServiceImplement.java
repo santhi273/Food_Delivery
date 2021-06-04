@@ -1,39 +1,45 @@
 package com.capg.foodonlinedelivery.service;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.capg.foodonlinedelivery.entities.Category;
-
+import com.capg.foodonlinedelivery.repository.ICategoryRepository;
+@Service
 public class CategoryServiceImplement implements ICategoryService {
-
+	@Autowired
+	ICategoryRepository repo;
 	@Override
 	public Category addCategory(Category category) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+		return repo.save(category);
+	}
+	
 	@Override
 	public Category updateCategory(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return repo.save(category);
 	}
 
 	@Override
-	public Category removeCategory(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+	public void removeCategory(Category category) {
+
+		 repo.delete(category);
 	}
 
 	@Override
-	public Category viewCategory(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Category viewCategoryById(String categoryId) {
+
+		return repo.findById(categoryId).orElse(new Category());
 	}
 
 	@Override
-	public List<Category> viewAllCategory(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Category> viewAllCategory() {
+		List<Category> list = new ArrayList();
+			list=	repo.findAll();
+		return list;
 	}
 
 }

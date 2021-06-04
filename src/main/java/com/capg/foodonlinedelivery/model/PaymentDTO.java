@@ -1,31 +1,27 @@
 package com.capg.foodonlinedelivery.model;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Payment {
-	@Id
+import com.capg.foodonlinedelivery.entities.OrderDetails;
+
+public class PaymentDTO {
+
 private String paymentId;
 private LocalDateTime paymentDate;
-@OneToOne(cascade=CascadeType.ALL)
-@JoinTable(name="order_id")
-private OrderDetails order;
+private OrderDetailsDTO order;
 private Integer totalItem;
 private Double totalCost;
 
 
 
 
-public Payment() {
+public PaymentDTO() {
 	super();
 }
-public Payment(String paymentId, LocalDateTime paymentDate, OrderDetails order, Integer totalItem, Double totalCost) {
+public PaymentDTO(String paymentId, LocalDateTime paymentDate, OrderDetailsDTO order, Integer totalItem, Double totalCost) {
 	super();
 	this.paymentId = paymentId;
 	this.paymentDate = paymentDate;
@@ -45,10 +41,10 @@ public LocalDateTime getPaymentDate() {
 public void setPaymentDate(LocalDateTime paymentDate) {
 	this.paymentDate = paymentDate;
 }
-public OrderDetails getOrder() {
+public OrderDetailsDTO getOrder() {
 	return order;
 }
-public void setOrder(OrderDetails order) {
+public void setOrder(OrderDetailsDTO order) {
 	this.order = order;
 }
 public Integer getTotalItem() {
