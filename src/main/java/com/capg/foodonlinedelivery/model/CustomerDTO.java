@@ -1,14 +1,13 @@
 package com.capg.foodonlinedelivery.model;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Customer {
-	@Id
+import com.capg.foodonlinedelivery.entities.Address;
+
+public class CustomerDTO {
+	
 	private Integer customerId;
 	private String firstName;
 	private String lastName;
@@ -19,11 +18,11 @@ public class Customer {
 	private String gender;
 	private Long phoneNumber;
 	
-	public Customer() {
+	public CustomerDTO() {
 		super();
 	}
 	
-	public Customer(Integer customerId, String firstName, String lastName, String emailId, Address address,
+	public CustomerDTO(Integer customerId, String firstName, String lastName, String emailId, Address address,
 			String gender, Long phoneNumber) {
 		super();
 		this.customerId = customerId;

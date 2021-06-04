@@ -1,21 +1,18 @@
 package com.capg.foodonlinedelivery.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity
-public class Category {
-	@Id
+class CategoryDTO {
+	
 private String categoryId;
 private String categoryName;
 
 
-public Category(String categoryId, String categoryName) {
+public CategoryDTO(String categoryId, String categoryName) {
 	super();
 	this.categoryId = categoryId;
 	this.categoryName = categoryName;
 }
-public Category() {
+public CategoryDTO() {
 	super();
 }
 public String getCategoryId() {

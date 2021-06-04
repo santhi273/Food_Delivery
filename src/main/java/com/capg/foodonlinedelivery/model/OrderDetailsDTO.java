@@ -1,16 +1,16 @@
 package com.capg.foodonlinedelivery.model;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 
-@Entity
-public class OrderDetails {
-@Id
+import com.capg.foodonlinedelivery.entities.FoodCart;
+
+public class OrderDetailsDTO {
+	
 private Integer orderId;
 private LocalDateTime orderDate;
 @OneToOne(cascade=CascadeType.ALL)
@@ -18,10 +18,10 @@ private LocalDateTime orderDate;
 private FoodCart cart;
 private String orderStatus;
 
-public OrderDetails() {
+public OrderDetailsDTO() {
 	super();
 }
-public OrderDetails(Integer orderId, LocalDateTime orderDate, FoodCart cart, String orderStatus) {
+public OrderDetailsDTO(Integer orderId, LocalDateTime orderDate, FoodCart cart, String orderStatus) {
 	super();
 	this.orderId = orderId;
 	this.orderDate = orderDate;

@@ -1,29 +1,26 @@
 package com.capg.foodonlinedelivery.model;
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import com.capg.foodonlinedelivery.entities.Customer;
 
-@Entity
-public class FoodCart {
-	@Id
-private String cartId;
+public class FoodCartDTO {
+	
+    private String cartId;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="item_id")
-private List<Items> itemList;
+    private List<Items> itemList;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinTable(name="customer_id")
-private Customer customer;
+    private Customer customer;
 	
-	public FoodCart() {
+	public FoodCartDTO() {
 		super();
 	}
-	public FoodCart(String cartId, List<Items> itemList, Customer customer) {
+	public FoodCartDTO(String cartId, List<Items> itemList, Customer customer) {
 		super();
 		this.cartId = cartId;
 		this.itemList = itemList;

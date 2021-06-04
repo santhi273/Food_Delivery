@@ -2,6 +2,7 @@ package com.capg.foodonlinedelivery.service;
 
 import java.util.List;
 
+
 import com.capg.foodonlinedelivery.entities.Customer;
 
 public interface ICustomerService {

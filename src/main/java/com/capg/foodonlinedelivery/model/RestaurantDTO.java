@@ -2,18 +2,17 @@ package com.capg.foodonlinedelivery.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Restaurant {
-	@Id
+import com.capg.foodonlinedelivery.entities.Address;
+import com.capg.foodonlinedelivery.entities.Items;
+
+public class RestaurantDTO {
+	
 private Integer restaurantId;
 	private String restaurantName;
 	private String managerName;
@@ -24,11 +23,11 @@ private Integer restaurantId;
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy="restaurant")
 	private List<Items> itemList=new ArrayList<>();
 	
-	public Restaurant() {
+	public RestaurantDTO() {
 		super();
 	}
 	
-	public Restaurant(Integer restaurantId, String restaurantName, String managerName, long phoneNumber,
+	public RestaurantDTO(Integer restaurantId, String restaurantName, String managerName, long phoneNumber,
 			Address address, List<Items> itemList) {
 		super();
 		this.restaurantId = restaurantId;

@@ -2,19 +2,17 @@ package com.capg.foodonlinedelivery.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Items {
-@Id
+import com.capg.foodonlinedelivery.entities.Category;
+
+public class ItemsDTO {
+
 private Integer itemId;
 private String itemName;
 @OneToOne(cascade=CascadeType.ALL)
@@ -28,10 +26,10 @@ private List<Restaurant> restaurant=new ArrayList<>();
 
 
 
-public Items() {
+public ItemsDTO() {
 	super();
 }
-public Items(Integer itemId, String itemName, Category category, Integer quantity, double cost,
+public ItemsDTO(Integer itemId, String itemName, Category category, Integer quantity, double cost,
 		List<Restaurant> restaurant) {
 	super();
 	this.itemId = itemId;
