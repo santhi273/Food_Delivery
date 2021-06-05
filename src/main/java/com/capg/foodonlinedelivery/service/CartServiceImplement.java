@@ -20,15 +20,26 @@ public class CartServiceImplement implements ICartService {
 	IItemRepository repo1;
 	@Override
 	public FoodCartDTO additemToCart(FoodCart cart,Items item) {
+		FoodCart foodCart=new FoodCart();
+		if(cart.getItemList().size()==0) {
 		cart.getItemList().add(item);
-		FoodCart foodCart=repo.save(cart);
+		foodCart=repo.save(cart);
+		}
+		else {
+		int newRestaurantId=item.getRestaurant().get(0).getRestaurantId();
+		int oldRestaurantId=cart.getItemList().get(0).getRestaurant().get(0).getRestaurantId();
+		if(newRestaurantId==oldRestaurantId)
+		{
+			cart.getItemList().add(item);
+			foodCart=repo.save(cart);
+		}
+		}
 		return FoodCartUtils.convertToFoodCartDto(foodCart);
 		
 	}
 
 	@Override
 	public FoodCartDTO increaseQuantity(FoodCart cart, Items item, int quantity) {
-		
 		int size= cart.getItemList().size();
 		int count=0;
 		for(int i=0;i<size;i++) {
@@ -84,5 +95,12 @@ public class CartServiceImplement implements ICartService {
 			cart.getItemList().clear();
 			return "cart cleared";
 			
+	}
+	public FoodCart getCartById(String cartId) {
+		return repo.findById(cartId).orElse(null);
+	}
+	@Override
+	public Items getItemById(int itemId) {
+		return repo1.findById(itemId).orElse(null);
 	}
 }
