@@ -4,17 +4,18 @@ import java.util.List;
 
 
 import com.capg.foodonlinedelivery.entities.Customer;
+import com.capg.foodonlinedelivery.model.CustomerDTO;
 
 public interface ICustomerService {
 	
-	public Customer addCustomer(Customer customer);
+	public CustomerDTO addCustomer(Customer customer);
 	
-	public Customer updateCustomer(Customer customer);
+	public CustomerDTO updateCustomer(Customer customer);
 	
 	public void deleteCustomerById(int customerId);
 	
-	public List<Customer> viewAllCustomers();
+	public List<CustomerDTO> viewAllCustomers();
 
-	public Customer viewCustomerById(int customerId);
+	public CustomerDTO viewCustomerById(int customerId);
 	
 }

@@ -1,10 +1,6 @@
 package com.capg.foodonlinedelivery.controller;
-
 import java.util.List;
-import java.util.Optional;
-
 import javax.persistence.criteria.Order;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+<<<<<<< HEAD
 
 
 import com.capg.foodonlinedelivery.entities.OrderDetails;
+=======
+>>>>>>> d4a3a2b8c8c3b053465e401661c43346ba0527bb
 import com.capg.foodonlinedelivery.model.OrderDetailsDTO;
 import com.capg.foodonlinedelivery.service.IOrderService;
 
@@ -37,28 +36,33 @@ public class OrderController {
 		return service.updateOrder(order);
 	}
 	
-	@GetMapping(value = "/get/{Id}")
-	public OrderDetails viewOrderById(int CustomerId) {
+	@GetMapping(value = "/get/{customerId}")
+	public OrderDetailsDTO viewOrderById(int customerId) {
 		
-		return service.viewOrderById(CustomerId);
+		return service.viewOrderById(customerId);
 	}
 	
-	@DeleteMapping(value = "/delete/{Id}")
-	public void  removeOrderById(int OrderId) {
+	@DeleteMapping(value = "/delete/{orderId}")
+	public void  removeOrderById(int orderId) {
 		
-		 service.removeOrderById(OrderId);
+		 service.removeOrderById(orderId);
 		 
 	}	 
 	
-	@GetMapping(value = "/get/restaurantName")
-	public List<OrderDetails> viewAllOrdersByRestaurant(String restaurantName) {
+	@GetMapping(value = "/get/{restaurantName}")
+	public List<OrderDetailsDTO> viewAllOrdersByRestaurant(String restaurantName) {
 		
 		return service.viewAllOrdersByRestaurant(restaurantName);
 	}
 	@GetMapping(value = "/get/{Id}")
+<<<<<<< HEAD
 
 	public OrderDetailsDTO viewAllOrdersByCustomer(int customerId) {
 
+=======
+	public OrderDetailsDTO viewAllOrdersByCustomer(int customerId) {
+		
+>>>>>>> d4a3a2b8c8c3b053465e401661c43346ba0527bb
 		return service.viewAllOrdersByCustomer(customerId);
 	}
 	
