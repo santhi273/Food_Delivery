@@ -1,25 +1,23 @@
 package com.capg.foodonlinedelivery.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
+
+import org.springframework.stereotype.Component;
 
 import com.capg.foodonlinedelivery.entities.FoodCart;
 
+@Component
 public class OrderDetailsDTO {
 	
 private Integer orderId;
 private LocalDateTime orderDate;
-private FoodCartDTO cart;
+private FoodCart cart;
 private String orderStatus;
 
 public OrderDetailsDTO() {
 	super();
 }
-public OrderDetailsDTO(Integer orderId, LocalDateTime orderDate, FoodCartDTO cart, String orderStatus) {
+public OrderDetailsDTO(Integer orderId, LocalDateTime orderDate, FoodCart cart, String orderStatus) {
 	super();
 	this.orderId = orderId;
 	this.orderDate = orderDate;
@@ -38,10 +36,10 @@ public LocalDateTime getOrderDate() {
 public void setOrderDate(LocalDateTime orderDate) {
 	this.orderDate = orderDate;
 }
-public FoodCartDTO getCart() {
+public FoodCart getCart() {
 	return cart;
 }
-public void setCart(FoodCartDTO cart) {
+public void setCart(FoodCart cart) {
 	this.cart = cart;
 }
 public String getOrderStatus() {

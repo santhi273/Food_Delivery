@@ -8,6 +8,6 @@ public interface ICartService {
 public FoodCart additemToCart(FoodCart cart,Items item);
 public FoodCart increaseQuantity(FoodCart cart,Items item,int quantity);
 public FoodCart reduceQuantity(FoodCart cart,Items item,int quantity);
-public FoodCart removeItem(FoodCart cart, Items item);
-public  FoodCart clearCart(FoodCart cart);
+public String removeItem(FoodCart cart, Items item);
+public  String clearCart(FoodCart cart);
 }
