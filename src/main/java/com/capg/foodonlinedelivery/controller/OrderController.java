@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.capg.foodonlinedelivery.entities.OrderDetails;
+import com.capg.foodonlinedelivery.model.OrderDetailsDTO;
 import com.capg.foodonlinedelivery.service.IOrderService;
 
 @RestController
@@ -54,7 +55,7 @@ public class OrderController {
 		return service.viewAllOrdersByRestaurant(restaurantName);
 	}
 	@GetMapping(value = "/get/{Id}")
-	public Optional<OrderDetails> viewAllOrdersByCustomer(int customerId) {
+	public OrderDetailsDTO viewAllOrdersByCustomer(int customerId) {
 		
 		return service.viewAllOrdersByCustomer(customerId);
 	}

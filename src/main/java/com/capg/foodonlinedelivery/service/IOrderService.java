@@ -15,11 +15,11 @@ public Order addOrder(Order order);
 	
 	public String removeOrderById(OrderDetails order);
 	
-	public OrderDetailsDTO viewOrderById(int id);
+	public OrderDetails viewOrderById(int id);
 	
 	public OrderDetailsDTO viewAllOrdersByCustomer(int id);
 	
-	public List<OrderDetailsDTO> viewAllOrdersByRestaurant(String resName);
+	public List<OrderDetails> viewAllOrdersByRestaurant(String resName);
 
 	void removeOrderById(int id);
 

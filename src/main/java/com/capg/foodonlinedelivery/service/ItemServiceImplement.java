@@ -18,7 +18,7 @@ public class ItemServiceImplement implements IItemService {
 	public ItemsDTO addItems(Items items) {
 
 		Items item1 = repository.saveAndFlush(items);
-		ItemsDTO itemdto = ItemsUtils.convertToItemsDto(items);
+		ItemsDTO itemdto = ItemsUtils.convertToItemsDto(item1);
 		return itemdto;
 	}
 
