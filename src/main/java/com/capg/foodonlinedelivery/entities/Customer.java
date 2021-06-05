@@ -77,7 +77,6 @@ public class Customer {
 	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
 
+	
 }
