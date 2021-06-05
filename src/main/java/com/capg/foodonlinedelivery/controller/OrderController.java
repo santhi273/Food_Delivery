@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capg.foodonlinedelivery.entities.Category;
+
 import com.capg.foodonlinedelivery.entities.OrderDetails;
 import com.capg.foodonlinedelivery.service.IOrderService;
 

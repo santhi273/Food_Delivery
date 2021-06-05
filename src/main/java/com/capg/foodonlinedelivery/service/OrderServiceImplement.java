@@ -24,7 +24,7 @@ public abstract class OrderServiceImplement implements IOrderService {
 
 	@Override
 	public OrderDetails updateOrder(OrderDetails order) {
-		// TODO Auto-generated method stub
+
 		return repo.save(order);
 	}
 
