@@ -64,8 +64,4 @@ public abstract class OrderServiceImplement implements IOrderService {
 		return list1;
 
 	}
-
-
-	
-
 }
