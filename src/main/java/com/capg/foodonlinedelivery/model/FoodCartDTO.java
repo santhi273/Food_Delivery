@@ -1,10 +1,6 @@
 package com.capg.foodonlinedelivery.model;
 
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import com.capg.foodonlinedelivery.entities.Customer;
 import com.capg.foodonlinedelivery.entities.Items;
 

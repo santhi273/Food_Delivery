@@ -2,7 +2,6 @@ package com.capg.foodonlinedelivery.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.model.FoodCartDTO;
 

@@ -22,8 +22,8 @@ public class CartServiceImplement implements ICartService {
 	public FoodCartDTO additemToCart(FoodCart cart,Items item) {
 		cart.getItemList().add(item);
 		FoodCart foodCart=repo.save(cart);
-		FoodCartDTO foodCartDto=FoodCartUtils.convertToFoodCartDto(foodCart);
-		return foodCartDto;
+		return FoodCartUtils.convertToFoodCartDto(foodCart);
+		
 	}
 
 	@Override
@@ -42,8 +42,8 @@ public class CartServiceImplement implements ICartService {
 				additemToCart(cart,item);
 			}
 			FoodCart cart1= cart;
-			FoodCartDTO foodCartDto=FoodCartUtils.convertToFoodCartDto(cart1);
-			return foodCartDto;
+			return FoodCartUtils.convertToFoodCartDto(cart1);
+			
 		}
 		else {
 			return null;
@@ -56,8 +56,8 @@ public class CartServiceImplement implements ICartService {
 			removeItem(cart,item);
 		}
 		FoodCart cart1= cart;
-		FoodCartDTO foodCartDto=FoodCartUtils.convertToFoodCartDto(cart1);
-		return foodCartDto;
+		return FoodCartUtils.convertToFoodCartDto(cart1);
+		 
 	}
 
 	@Override

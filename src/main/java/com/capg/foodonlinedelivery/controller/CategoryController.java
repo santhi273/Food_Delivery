@@ -17,7 +17,6 @@ import com.capg.foodonlinedelivery.service.ICategoryService;
 @RestController
 @RequestMapping("/api/Category")
 public class CategoryController {
-	
 	@Autowired
 	ICategoryService service;
 	

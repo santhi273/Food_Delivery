@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.capg.foodonlinedelivery.entities.Category;
 import com.capg.foodonlinedelivery.model.CategoryDTO;
-
-
 public class CategoryUtils {
 	public static List<CategoryDTO> convertToCategoryDtoList(List<Category> list){
 		List<CategoryDTO> dtolist = new ArrayList<CategoryDTO>();

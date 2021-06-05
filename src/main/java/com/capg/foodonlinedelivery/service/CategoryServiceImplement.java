@@ -16,16 +16,16 @@ public class CategoryServiceImplement implements ICategoryService {
 	public CategoryDTO addCategory(Category category) {
 
 		Category category1= repo.save(category);
-		CategoryDTO categoryDto=CategoryUtils.convertToCategoryDto(category1);
-		return categoryDto;
+		return CategoryUtils.convertToCategoryDto(category1);
+	
 	}
 	
 	@Override
 	public CategoryDTO updateCategory(Category category) {
 
 		Category category1= repo.save(category);
-		CategoryDTO categoryDto=CategoryUtils.convertToCategoryDto(category1);
-		return categoryDto;
+		return CategoryUtils.convertToCategoryDto(category1);
+		
 	}
 
 	@Override
@@ -39,15 +39,15 @@ public class CategoryServiceImplement implements ICategoryService {
 	public CategoryDTO viewCategoryById(String categoryId) {
 
 		Category category= repo.findById(categoryId).orElse(new Category());
-		CategoryDTO categoryDto=CategoryUtils.convertToCategoryDto(category);
-		return categoryDto;
+		return CategoryUtils.convertToCategoryDto(category);
+	
 	}
 
 	@Override
 	public List<CategoryDTO> viewAllCategory() {
 		List<Category> list =repo.findAll();
-		List<CategoryDTO> list1=CategoryUtils.convertToCategoryDtoList(list);
-		return list1;
+	return CategoryUtils.convertToCategoryDtoList(list);
+	
 	}
 
 }

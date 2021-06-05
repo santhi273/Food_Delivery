@@ -21,11 +21,8 @@ import com.capg.foodonlinedelivery.service.ICartService;
 public class CartController {
 	@Autowired
 ICartService service;
-	
 	@PostMapping("/add")
-	
 	public FoodCartDTO additemToCart(@RequestBody FoodCart cart,Items item)
-	
 	{
 		return service.additemToCart(cart, item);		
 	}
