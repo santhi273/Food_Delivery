@@ -11,7 +11,7 @@ public class PaymentDTO {
 
 private String paymentId;
 private LocalDateTime paymentDate;
-private OrderDetailsDTO order;
+private OrderDetails order;
 private Integer totalItem;
 private Double totalCost;
 
@@ -21,7 +21,7 @@ private Double totalCost;
 public PaymentDTO() {
 	super();
 }
-public PaymentDTO(String paymentId, LocalDateTime paymentDate, OrderDetailsDTO order, Integer totalItem, Double totalCost) {
+public PaymentDTO(String paymentId, LocalDateTime paymentDate, OrderDetails order, Integer totalItem, Double totalCost) {
 	super();
 	this.paymentId = paymentId;
 	this.paymentDate = paymentDate;
@@ -41,10 +41,10 @@ public LocalDateTime getPaymentDate() {
 public void setPaymentDate(LocalDateTime paymentDate) {
 	this.paymentDate = paymentDate;
 }
-public OrderDetailsDTO getOrder() {
+public OrderDetails getOrder() {
 	return order;
 }
-public void setOrder(OrderDetailsDTO order) {
+public void setOrder(OrderDetails order) {
 	this.order = order;
 }
 public Integer getTotalItem() {

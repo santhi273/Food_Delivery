@@ -36,28 +36,28 @@ public class OrderController {
 		return service.updateOrder(order);
 	}
 	
-	@GetMapping(value = "/get/{Id}")
-	public OrderDetails viewOrderById(int CustomerId) {
+	@GetMapping(value = "/get/{customerId}")
+	public OrderDetails viewOrderById(int customerId) {
 		
-		return service.viewOrderById(CustomerId);
+		return service.viewOrderById(customerId);
 	}
 	
-	@DeleteMapping(value = "/delete/{Id}")
-	public void  removeOrderById(int OrderId) {
+	@DeleteMapping(value = "/delete/{orderId}")
+	public void  removeOrderById(int orderId) {
 		
-		 service.removeOrderById(OrderId);
+		 service.removeOrderById(orderId);
 		 
 	}	 
 	
-	@GetMapping(value = "/get/restaurantName")
+	@GetMapping(value = "/get/{restaurantName}")
 	public List<OrderDetails> viewAllOrdersByRestaurant(String restaurantName) {
 		
 		return service.viewAllOrdersByRestaurant(restaurantName);
 	}
 	@GetMapping(value = "/get/{Id}")
-	public Optional<OrderDetails> viewAllOrdersByCustomer(int CustomerId) {
+	public Optional<OrderDetails> viewAllOrdersByCustomer(int customerId) {
 		
-		return service.viewAllOrdersByCustomer(CustomerId);
+		return service.viewAllOrdersByCustomer(customerId);
 	}
 	
 
