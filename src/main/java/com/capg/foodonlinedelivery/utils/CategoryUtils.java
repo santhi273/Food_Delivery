@@ -12,7 +12,6 @@ public class CategoryUtils {
 			dtolist.add(convertToCategoryDto(Category));
 		return dtolist;
 	}
-	
 	public static Category convertToCategory(CategoryDTO categorydto) {
 		Category category = new Category();
 		category.setCategoryId(categorydto.getCategoryId());

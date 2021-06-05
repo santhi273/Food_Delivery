@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.model.FoodCartDTO;
 import com.capg.foodonlinedelivery.service.ICartService;
-
 @RestController
 @RequestMapping("/Food/cart")
 public class CartController {

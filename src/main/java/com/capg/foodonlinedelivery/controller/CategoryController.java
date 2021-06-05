@@ -19,7 +19,6 @@ import com.capg.foodonlinedelivery.service.ICategoryService;
 public class CategoryController {
 	@Autowired
 	ICategoryService service;
-	
 	@PostMapping(value = "/add", consumes = {"application/json"}, produces = {"application/json"})
 	public CategoryDTO addCategory(Category category) {
 		

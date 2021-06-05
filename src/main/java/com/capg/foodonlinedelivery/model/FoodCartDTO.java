@@ -1,9 +1,7 @@
 package com.capg.foodonlinedelivery.model;
-
 import java.util.List;
 import com.capg.foodonlinedelivery.entities.Customer;
 import com.capg.foodonlinedelivery.entities.Items;
-
 public class FoodCartDTO {
 	
     private String cartId;

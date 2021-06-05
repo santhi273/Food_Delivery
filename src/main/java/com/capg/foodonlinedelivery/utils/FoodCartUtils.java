@@ -12,7 +12,6 @@ public class FoodCartUtils {
 			dtolist.add(convertToFoodCartDto(FoodCart));
 		return dtolist;
 	}
-	
 	public static FoodCart convertToFoodCart(FoodCartDTO foodCartdto) {
 		FoodCart foodCart = new FoodCart();
 		foodCart.setCartId(foodCartdto.getCartId());
