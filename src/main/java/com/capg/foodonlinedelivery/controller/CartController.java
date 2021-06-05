@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.entities.Items;
+import com.capg.foodonlinedelivery.model.FoodCartDTO;
 import com.capg.foodonlinedelivery.service.ICartService;
 
 @RestController
@@ -23,17 +24,17 @@ ICartService service;
 	
 	@PostMapping("/add")
 	
-	public FoodCart additemToCart(@RequestBody FoodCart cart,Items item)
+	public FoodCartDTO additemToCart(@RequestBody FoodCart cart,Items item)
 	
 	{
 		return service.additemToCart(cart, item);		
 	}
 	@PutMapping(value="/addquantity/{cart}/{item}/{quantity}")
-	public FoodCart increaseQuantity(FoodCart cart, Items item, int quantity) {
+	public FoodCartDTO increaseQuantity(FoodCart cart, Items item, int quantity) {
 		return service.increaseQuantity(cart, item, quantity);
 	}
 	@PutMapping(value="/reducequantity/{cart}/{item}/{quantity}")
-	public FoodCart reduceQuantity(FoodCart cart, Items item, int quantity) {
+	public FoodCartDTO reduceQuantity(FoodCart cart, Items item, int quantity) {
 		return service.reduceQuantity(cart, item, quantity);
 	}
 	@DeleteMapping(value="/delete/{cart}")

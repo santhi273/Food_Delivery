@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Items {
 @Id
-private Integer itemId;
+private String itemId;
 private String itemName;
 @OneToOne(cascade=CascadeType.ALL)
 @JoinTable(name="category_id")
@@ -31,7 +31,7 @@ private List<Restaurant> restaurant=new ArrayList<>();
 public Items() {
 	super();
 }
-public Items(Integer itemId, String itemName, Category category, Integer quantity, double cost,
+public Items(String itemId, String itemName, Category category, Integer quantity, double cost,
 		List<Restaurant> restaurant) {
 	super();
 	this.itemId = itemId;
@@ -41,10 +41,10 @@ public Items(Integer itemId, String itemName, Category category, Integer quantit
 	this.cost = cost;
 	this.restaurant = restaurant;
 }
-public Integer getItemId() {
+public String getItemId() {
 	return itemId;
 }
-public void setItemId(Integer itemId) {
+public void setItemId(String itemId) {
 	this.itemId = itemId;
 }
 public String getItemName() {

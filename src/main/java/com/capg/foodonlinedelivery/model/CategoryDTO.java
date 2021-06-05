@@ -1,8 +1,10 @@
 package com.capg.foodonlinedelivery.model;
 
+import org.springframework.stereotype.Component;
 
-class CategoryDTO {
-	
+@Component
+public class CategoryDTO {
+
 private String categoryId;
 private String categoryName;
 
