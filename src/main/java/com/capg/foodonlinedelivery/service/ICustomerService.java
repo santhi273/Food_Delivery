@@ -11,10 +11,10 @@ public interface ICustomerService {
 	
 	public Customer updateCustomer(Customer customer);
 	
-	public void deleteCustomer();
+	public void deleteCustomerById(int customerId);
 	
 	public List<Customer> viewAllCustomers();
-	
-	public Customer ViewCustomer(Customer customer);
 
+	public Customer viewCustomerById(int customerId);
+	
 }

@@ -2,38 +2,47 @@ package com.capg.foodonlinedelivery.service;
 
 import java.util.List;
 
-import com.capg.foodonlinedelivery.entities.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.capg.foodonlinedelivery.entities.Customer;
+import com.capg.foodonlinedelivery.repository.ICustomerRepository;
+
+@Service
 public class CustomerServiceImplement implements ICustomerService {
+	
+	@Autowired
+	ICustomerRepository repo;
 
 	@Override
 	public Customer addCustomer(Customer customer) {
 
-		return null;
+		return repo.save(customer);
 	}
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
 
-		return null;
+		return repo.save(customer);
 	}
 
 	@Override
-	public void deleteCustomer() {
+	public void deleteCustomerById(int customerId) {
 
-		
+		repo.deleteById(customerId);
 	}
 
 	@Override
 	public List<Customer> viewAllCustomers() {
 
-		return null;
+		return repo.findAll();
 	}
 
 	@Override
-	public Customer ViewCustomer(Customer customer) {
-
-		return null;
+	public Customer viewCustomerById(int customerId) {
+		
+		return  repo.findById(customerId);
 	}
+
 
 }

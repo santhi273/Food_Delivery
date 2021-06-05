@@ -2,22 +2,21 @@ package com.capg.foodonlinedelivery.service;
 
 import java.util.List;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
+import com.capg.foodonlinedelivery.entities.Items;
 
 public interface IItemService {
-	public Item addItem(Item item);
+	public Items addItems(Items items);
 
-	public Item updateItem(Item item);
+	public Items updateItems(Items items);
 
-	public Item viewItemById(Integer id);
+	public Items viewItemsById(Integer id);
 
-	public Item removeItem(Item item);
+	public String removeItems(Items items);
 
-	public List<Item> viewAllItemsByCategory(String name);
+	public List<Items> viewAllItemssByCategory(String name);
 
-	public List<Item> findItemsByRestaurant(String name);
+	public List<Items> findItemssByRestaurant(String name);
 
-	public List<Item> viewAllItemsByItemName(String name);
-
+	public List<Items> viewAllItemssByItemsName(String name);
 
 }
