@@ -54,15 +54,11 @@ public class OrderController {
 		
 		return service.viewAllOrdersByRestaurant(restaurantName);
 	}
+	
 	@GetMapping(value = "/get/{Id}")
-<<<<<<< HEAD
-
 	public OrderDetailsDTO viewAllOrdersByCustomer(int customerId) {
 
-=======
-	public OrderDetailsDTO viewAllOrdersByCustomer(int customerId) {
-		
->>>>>>> d4a3a2b8c8c3b053465e401661c43346ba0527bb
+
 		return service.viewAllOrdersByCustomer(customerId);
 	}
 	

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.model.ItemsDTO;
 import com.capg.foodonlinedelivery.repository.IItemRepository;
-import com.capg.foodonlinedelivery.utils.ItemsUtils;
 
 @Service
 public class ItemServiceImplement implements IItemService {
@@ -17,63 +16,47 @@ public class ItemServiceImplement implements IItemService {
 	@Override
 	public ItemsDTO addItems(Items items) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 		Items item1 = repository.saveAndFlush(items);
 		ItemsDTO itemdto = ItemsUtils.convertToItemsDto(item1);
 		return itemdto;
-=======
-		return repository.saveAndFlush(items);
->>>>>>> branch 'master' of https://github.com/santhi273/Food_Delivery
-=======
-		Items item1 = repository.saveAndFlush(items);
-		ItemsDTO itemdto = ItemsUtils.convertToItemsDto(items);
-		return itemdto;
->>>>>>> d4a3a2b8c8c3b053465e401661c43346ba0527bb
+		
 	}
 
 	@Override
-	public ItemsDTO updateItems(Items items) {
-		Items items1 = repository.save(items);
-		ItemsDTO itemdto = ItemsUtils.convertToItemsDto(items1);
-		return itemdto;
+	public Items updateItems(Items items) {
+		return repository.save(items);
 	}
 
 	@Override
-	public ItemsDTO viewItemsById(Integer id) {
-		Items itemId = repository.findById(id).orElse(null);
-		ItemsDTO itemdto = ItemsUtils.convertToItemsDto(itemId);
-		return itemdto;
+	public Items viewItemsById(Integer id) {
+		return repository.findById(id).orElse(null);
 
 	}
 
 	@Override
-	public void removeItems(Items items) {
+	public String removeItems(Items items) {
 		repository.delete(items);
-
+		return "iteams deleted";
 	}
 
 	@Override
-	public List<ItemsDTO> viewAllItemssByCategory(String name) {
+	public List<Items> viewAllItemssByCategory(String name) {
 		List<Items> list = repository.findItemsByCategory(name);
-		List<ItemsDTO> itemdto = ItemsUtils.convertToItemsDtoList(list);
-		return itemdto;
+		return list;
 	}
 
 	@Override
-	public List<ItemsDTO> findItemssByRestaurant(String name) {
+	public List<Items> findItemssByRestaurant(String name) {
 		List<Items> list = repository.findItemsByRestaurant(name);
-		List<ItemsDTO> itemdto = ItemsUtils.convertToItemsDtoList(list);
-		return itemdto;
+		return list;
 
 	}
 
 	@Override
-	public List<ItemsDTO> viewAllItemssByItemsName(String name) {
+	public List<Items> viewAllItemssByItemsName(String name) {
 
 		List<Items> list = repository.findItemsByRestaurant(name);
-		List<ItemsDTO> itemdto = ItemsUtils.convertToItemsDtoList(list);
-		return itemdto;
+		return list;
 
 	}
 
