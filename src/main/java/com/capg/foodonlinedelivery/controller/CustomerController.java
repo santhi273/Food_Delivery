@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.capg.foodonlinedelivery.entities.Customer;
-import com.capg.foodonlinedelivery.model.CustomerDTO;
 import com.capg.foodonlinedelivery.service.ICustomerService;
 
 @RestController
@@ -22,19 +21,19 @@ public class CustomerController {
 	ICustomerService service;
 	
 	@PostMapping(value = "/add", consumes = {"application/json"}, produces = {"application/json"})
-	public CustomerDTO addCustomer(@RequestBody Customer customer) {
+	public Customer addCustomer(@RequestBody Customer customer) {
 		
 		return service.addCustomer(customer);
 	}
 	
 	@PutMapping(value = "/update")
-	public CustomerDTO updateCustomer(@RequestBody Customer customer) {
+	public Customer updateCustomer(@RequestBody Customer customer) {
 		
 		return service.updateCustomer(customer);
 	}
 	
 	@GetMapping(value = "/get")
-	public List<CustomerDTO> viewAllCustomers(){
+	public List<Customer> viewAllCustomers(){
 		
 		return service.viewAllCustomers();
 	}
@@ -46,7 +45,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping(value = "/get/{Id}")
-	public CustomerDTO viewCustomerById(@PathVariable int customerId) {
+	public Customer viewCustomerById(int customerId) {
 		
 		return service.viewCustomerById(customerId);
 	}

@@ -8,16 +8,16 @@ import com.capg.foodonlinedelivery.model.ItemsDTO;
 public interface IItemService {
 	public ItemsDTO addItems(Items items);
 
-	public ItemsDTO updateItems(Items items);
+	public Items updateItems(Items items);
 
-	public ItemsDTO viewItemsById(Integer id);
+	public Items viewItemsById(Integer id);
 
-	public void removeItems(Items items);
+	public String removeItems(Items items);
 
-	public List<ItemsDTO> viewAllItemssByCategory(String name);
+	public List<Items> viewAllItemssByCategory(String name);
 
-	public List<ItemsDTO> findItemssByRestaurant(String name);
+	public List<Items> findItemssByRestaurant(String name);
 
-	public List<ItemsDTO> viewAllItemssByItemsName(String name);
+	public List<Items> viewAllItemssByItemsName(String name);
 
 }

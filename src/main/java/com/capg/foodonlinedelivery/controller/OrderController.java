@@ -2,6 +2,7 @@ package com.capg.foodonlinedelivery.controller;
 
 import java.util.List;
 import java.util.Optional;
+
 import javax.persistence.criteria.Order;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,27 +37,28 @@ public class OrderController {
 		return service.updateOrder(order);
 	}
 	
-	@GetMapping(value = "/get/{customerId}")
-	public OrderDetails viewOrderById(int customerId) {
+	@GetMapping(value = "/get/{Id}")
+	public OrderDetails viewOrderById(int CustomerId) {
 		
-		return service.viewOrderById(customerId);
+		return service.viewOrderById(CustomerId);
 	}
 	
-	@DeleteMapping(value = "/delete/{orderId}")
-	public void  removeOrderById(int orderId) {
+	@DeleteMapping(value = "/delete/{Id}")
+	public void  removeOrderById(int OrderId) {
 		
-		 service.removeOrderById(orderId);
+		 service.removeOrderById(OrderId);
 		 
 	}	 
 	
-	@GetMapping(value = "/get/{restaurantName}")
+	@GetMapping(value = "/get/restaurantName")
 	public List<OrderDetails> viewAllOrdersByRestaurant(String restaurantName) {
 		
 		return service.viewAllOrdersByRestaurant(restaurantName);
 	}
 	@GetMapping(value = "/get/{Id}")
+
 	public OrderDetailsDTO viewAllOrdersByCustomer(int customerId) {
-		
+
 		return service.viewAllOrdersByCustomer(customerId);
 	}
 	

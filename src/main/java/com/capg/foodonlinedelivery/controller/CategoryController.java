@@ -13,29 +13,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.foodonlinedelivery.entities.Category;
+import com.capg.foodonlinedelivery.model.CategoryDTO;
 import com.capg.foodonlinedelivery.service.ICategoryService;
 
 @RestController
 @RequestMapping("/api/Category")
 public class CategoryController {
-	
 	@Autowired
 	ICategoryService service;
-	
-	@PostMapping(value = "/add", consumes = {"application/json"}, produces = {"application/json"})
-	public Category addCategory(@RequestBody Category category) {
-		
+	@PostMapping(value = "/add")
+
+
+
+	public CategoryDTO addCategory(@RequestBody Category category) {
+
 		return service.addCategory(category);
 	}
 	
 	@PutMapping(value = "/update")
-	public Category updateCategory(@RequestBody Category category) {
+
+
+
+	public CategoryDTO updateCategory(@RequestBody Category category) {
+
 		
 		return service.updateCategory(category);
 	}
 	
 	@GetMapping(value = "/get/{Id}")
-	public Category viewCategoryById(@PathVariable String categoryId) {
+
+
+	public CategoryDTO viewCategoryById(@PathVariable String categoryId) {
 		
 		return service.viewCategoryById(categoryId);
 	}
@@ -48,7 +56,7 @@ public class CategoryController {
 	}	 
 	
 	@GetMapping(value = "/get/Category")
-	public List<Category> viewAllCategory(){
+	public List<CategoryDTO> viewAllCategory(){
 		
 		return service.viewAllCategory();
 	}

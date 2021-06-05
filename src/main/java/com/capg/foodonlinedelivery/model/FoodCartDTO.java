@@ -1,14 +1,17 @@
 package com.capg.foodonlinedelivery.model;
-
 import java.util.List;
+
+import com.capg.foodonlinedelivery.entities.Customer;
+import com.capg.foodonlinedelivery.entities.Items;
+
 
 import org.springframework.stereotype.Component;
 
-import com.capg.foodonlinedelivery.entities.Customer;
+
 
 @Component
+
 public class FoodCartDTO {
-	
     private String cartId;
     private List<Items> itemList;
     private Customer customer;
@@ -41,4 +44,5 @@ public class FoodCartDTO {
 		this.customer = customer;
 	}
 	
+
 }

@@ -13,12 +13,12 @@ import javax.persistence.OneToOne;
 public class FoodCart {
 	@Id
 private String cartId;
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="foodcart")
 	@JoinTable(name="item_id")
-private List<Items> itemList;
+	private List<Items> itemList;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinTable(name="customer_id")
-private Customer customer;
+	private Customer customer;
 	
 	public FoodCart() {
 		super();

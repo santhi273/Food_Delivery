@@ -23,8 +23,8 @@ public Order addOrder(Order order);
 
 	void removeOrderById(int id);
 
-	OrderDetailsDTO updateOrder(OrderDetails order);
+	OrderDetails updateOrder(OrderDetails order);
 
 }
-//
+
 

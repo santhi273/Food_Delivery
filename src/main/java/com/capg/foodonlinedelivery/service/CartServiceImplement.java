@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.entities.Items;
+import com.capg.foodonlinedelivery.model.FoodCartDTO;
 import com.capg.foodonlinedelivery.repository.ICartRepository;
 import com.capg.foodonlinedelivery.repository.IItemRepository;
+import com.capg.foodonlinedelivery.utils.FoodCartUtils;
 @Service
 @Transactional
 public class CartServiceImplement implements ICartService {
@@ -17,13 +19,15 @@ public class CartServiceImplement implements ICartService {
 	@Autowired
 	IItemRepository repo1;
 	@Override
-	public FoodCart additemToCart(FoodCart cart,Items item) {
+	public FoodCartDTO additemToCart(FoodCart cart,Items item) {
 		cart.getItemList().add(item);
-		return repo.save(cart);
+		FoodCart foodCart=repo.save(cart);
+		return FoodCartUtils.convertToFoodCartDto(foodCart);
+		
 	}
 
 	@Override
-	public FoodCart increaseQuantity(FoodCart cart, Items item, int quantity) {
+	public FoodCartDTO increaseQuantity(FoodCart cart, Items item, int quantity) {
 		
 		int size= cart.getItemList().size();
 		int count=0;
@@ -37,7 +41,9 @@ public class CartServiceImplement implements ICartService {
 			for(int i=0;i<quantity;i++) {
 				additemToCart(cart,item);
 			}
-			return cart;
+			FoodCart cart1= cart;
+			return FoodCartUtils.convertToFoodCartDto(cart1);
+			
 		}
 		else {
 			return null;
@@ -45,11 +51,13 @@ public class CartServiceImplement implements ICartService {
 	}
 
 	@Override
-	public FoodCart reduceQuantity(FoodCart cart, Items item, int quantity) {
+	public FoodCartDTO reduceQuantity(FoodCart cart, Items item, int quantity) {
 		for(int i=0;i<quantity;i++) {
 			removeItem(cart,item);
 		}
-		return cart;
+		FoodCart cart1= cart;
+		return FoodCartUtils.convertToFoodCartDto(cart1);
+		 
 	}
 
 	@Override
@@ -77,5 +85,4 @@ public class CartServiceImplement implements ICartService {
 			return "cart cleared";
 			
 	}
-
 }
