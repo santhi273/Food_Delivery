@@ -18,8 +18,6 @@ public class CategoryUtils {
 		category.setCategoryName(categorydto.getCategoryName());
 		return category;
 	}
-	
-	
 		public static CategoryDTO convertToCategoryDto(Category category) {
 			CategoryDTO categorydto = new CategoryDTO();
 			categorydto.setCategoryId(category.getCategoryId());

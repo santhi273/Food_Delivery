@@ -19,7 +19,6 @@ public class CategoryServiceImplement implements ICategoryService {
 		return CategoryUtils.convertToCategoryDto(category1);
 	
 	}
-	
 	@Override
 	public CategoryDTO updateCategory(Category category) {
 
