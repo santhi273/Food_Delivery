@@ -19,7 +19,7 @@ private String itemName;
 private Category category;
 private Integer quantity;
 private double cost;
-private List<RestaurantDTO> restaurant=new ArrayList<>();
+private List<Restaurant> restaurant=new ArrayList<>();
 
 
 
@@ -27,7 +27,7 @@ public ItemsDTO() {
 	super();
 }
 public ItemsDTO(Integer itemId, String itemName, Category category, Integer quantity, double cost,
-		List<RestaurantDTO> restaurant) {
+		List<Restaurant> restaurant) {
 	super();
 	this.itemId = itemId;
 	this.itemName = itemName;
@@ -66,10 +66,10 @@ public double getCost() {
 public void setCost(double cost) {
 	this.cost = cost;
 }
-public List<RestaurantDTO> getRestaurant() {
+public List<Restaurant> getRestaurant() {
 	return restaurant;
 }
-public void setRestaurant(List<RestaurantDTO> restaurant) {
+public void setRestaurant(List<Restaurant> restaurant) {
 	this.restaurant = restaurant;
 }
 
