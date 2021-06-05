@@ -1,13 +1,16 @@
 package com.capg.foodonlinedelivery.service;
 
+import java.util.List;
+
 import com.capg.foodonlinedelivery.entities.Restaurant;
+import com.capg.foodonlinedelivery.model.RestaurantDTO;
 
 public interface IRestaurantService {
-	public Restaurant addRestaurant(Restaurant res);
-	public Restaurant updateRestaurant(Restaurant res);
-	public Restaurant removeRestaurant(Restaurant res);
-	public Restaurant viewRestaurant(Restaurant res);
-	public Restaurant viewRestaurantByItemName(String name);
+	public RestaurantDTO addRestaurant(Restaurant restaurant);
+	public RestaurantDTO updateRestaurant(Restaurant restaurant);
+	public List<RestaurantDTO> viewRestaurantByItemName(String name);
+	public List<RestaurantDTO> viewRestaurant();
+	public String removeRestaurantById(Integer restaurantId);
 
 
 }

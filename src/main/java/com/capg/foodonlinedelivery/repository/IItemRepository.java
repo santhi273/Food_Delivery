@@ -13,6 +13,9 @@ public interface IItemRepository extends JpaRepository<Items, Integer> {
 
 	public List<Items> findItemsByRestaurant(String name);
 
+	public void deleteById(String itemId);
+
+
 
 
 	

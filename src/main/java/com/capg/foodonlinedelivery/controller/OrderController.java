@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+<<<<<<< HEAD
+
+
+import com.capg.foodonlinedelivery.entities.OrderDetails;
+=======
+>>>>>>> d4a3a2b8c8c3b053465e401661c43346ba0527bb
 import com.capg.foodonlinedelivery.model.OrderDetailsDTO;
 import com.capg.foodonlinedelivery.service.IOrderService;
 
@@ -48,9 +54,11 @@ public class OrderController {
 		
 		return service.viewAllOrdersByRestaurant(restaurantName);
 	}
+	
 	@GetMapping(value = "/get/{Id}")
 	public OrderDetailsDTO viewAllOrdersByCustomer(int customerId) {
-		
+
+
 		return service.viewAllOrdersByCustomer(customerId);
 	}
 	
