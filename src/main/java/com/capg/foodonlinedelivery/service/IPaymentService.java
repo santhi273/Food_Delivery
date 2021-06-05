@@ -4,13 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.capg.foodonlinedelivery.entities.Payment;
+import com.capg.foodonlinedelivery.model.PaymentDTO;
 
 public interface IPaymentService {
-	public Payment addPayment(Payment payment);
-	public Payment updatePayment(Payment payment);
-	public Payment removePayment(Payment payment);
-	public Payment viewPayment(Payment payment);
-	public List<Payment> viewPaymentByCustomerId(int customerId);
-	public List<Payment> viewPayment(LocalDate startDate,LocalDate endDate);
-	public Payment calculateTotalCost(double payment);
+	public PaymentDTO addPayment(Payment payment);
+	public PaymentDTO updatePayment(Payment payment);
+	public void removePayment(Payment payment);
+	public List<PaymentDTO> viewPaymentByCustomerId(int customerId);
+	public List<PaymentDTO> viewPayment(LocalDate startDate,LocalDate endDate);
+	public PaymentDTO calculateTotalCost(double payment);
+	public PaymentDTO viewPaymentById(String paymentId);
 }
