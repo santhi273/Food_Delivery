@@ -1,13 +1,17 @@
 package com.capg.foodonlinedelivery.model;
 
+import org.springframework.stereotype.Component;
 
+import com.capg.foodonlinedelivery.entities.Address;
+
+@Component
 public class CustomerDTO {
 	
 	private Integer customerId;
 	private String firstName;
 	private String lastName;
 	private String emailId;
-	private AddressDTO address;
+	private Address address;
 	private String gender;
 	private Long phoneNumber;
 	
@@ -15,7 +19,7 @@ public class CustomerDTO {
 		super();
 	}
 	
-	public CustomerDTO(Integer customerId, String firstName, String lastName, String emailId, AddressDTO address,
+	public CustomerDTO(Integer customerId, String firstName, String lastName, String emailId, Address address,
 			String gender, Long phoneNumber) {
 		super();
 		this.customerId = customerId;
@@ -51,10 +55,10 @@ public class CustomerDTO {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public AddressDTO getAddress() {
+	public Address getAddress() {
 		return address;
 	}
-	public void setAddress(AddressDTO address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	public String getGender() {
