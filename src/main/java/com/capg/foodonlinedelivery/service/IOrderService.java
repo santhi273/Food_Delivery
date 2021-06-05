@@ -24,7 +24,5 @@ public Order addOrder(Order order);
 
 	OrderDetails updateOrder(OrderDetails order);
 
-
-	
-
 }
+

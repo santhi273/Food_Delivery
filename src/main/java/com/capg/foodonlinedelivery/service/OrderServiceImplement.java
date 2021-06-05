@@ -17,7 +17,7 @@ public abstract class OrderServiceImplement implements IOrderService {
 	@Autowired
 	IOrderRepository repo;
 	public OrderDetails addOrder(OrderDetails order) {
-		// TODO Auto-generated method stub
+	
 		return repo.save(order);
 	}
 
