@@ -10,51 +10,58 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capg.foodonlinedelivery.entities.OrderDetails;
+import com.capg.foodonlinedelivery.model.OrderDetailsDTO;
 import com.capg.foodonlinedelivery.repository.IOrderRepository;
+import com.capg.foodonlinedelivery.utils.OrderDetailsUtils;
 @Service
 @Transactional
 public abstract class OrderServiceImplement implements IOrderService {
 	@Autowired
 	IOrderRepository repo;
-	public OrderDetails addOrder(OrderDetails order) {
-	
-		return repo.save(order);
+	public OrderDetailsDTO addOrder(OrderDetails order) {
+	OrderDetails order1 = repo.save(order);
+		OrderDetailsDTO orderDetailsDto = OrderDetailsUtils.convertToOrderDetailsDto(order1);
+		return orderDetailsDto;
 	}
 
 
 	@Override
-	public OrderDetails updateOrder(OrderDetails order) {
-
-		return repo.save(order);
+	public OrderDetailsDTO updateOrder(OrderDetails order) {
+		OrderDetails order1 = repo.save(order);
+		OrderDetailsDTO orderDetailsDto = OrderDetailsUtils.convertToOrderDetailsDto(order1);
+		return orderDetailsDto;
 	}
 
 	
 	@Override
 	public void  removeOrderById(int OrderId) {
-		// TODO Auto-generated method stub
 		repo.deleteById(OrderId);
 	}
 
 	@Override
-	public OrderDetails viewOrderById(int CustomerId) {
-		// TODO Auto-generated method stub
-		return repo.findById(CustomerId).orElse(new OrderDetails());
-	}
-
-	@Override
-	public Optional<OrderDetails> viewAllOrdersByCustomer(int CustomerId) {
-		// TODO Auto-generated method stub
-		return  repo.findById(CustomerId);
-	}
-
-	@Override
-	public List<OrderDetails> viewAllOrdersByRestaurant(String restaurantName) {
-		// TODO Auto-generated method stub
-		return  repo.findByName(restaurantName);
-
-	}
-
-
+	public OrderDetailsDTO viewOrderById(int CustomerId) {
+		OrderDetails order1 = repo.findById(CustomerId).orElse(new OrderDetails());
+		OrderDetailsDTO orderDetailsDto = OrderDetailsUtils.convertToOrderDetailsDto(order1);
+		return orderDetailsDto;
 	
+		
+	}
 
+	@Override
+	public OrderDetailsDTO viewAllOrdersByCustomer(int CustomerId) {
+	
+		OrderDetails order1 = repo.findById(CustomerId).orElse(new OrderDetails());
+		OrderDetailsDTO orderDetailsDto = OrderDetailsUtils.convertToOrderDetailsDto(order1);
+		return orderDetailsDto;
+	
+	}
+
+	@Override
+	public List<OrderDetailsDTO> viewAllOrdersByRestaurant(String restaurantName) {
+		List<OrderDetails> list =repo.findAll();
+		List<OrderDetailsDTO> list1=OrderDetailsUtils.convertToOrderDetailsDtoList(list);
+
+		return list1;
+
+	}
 }

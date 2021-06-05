@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.persistence.criteria.Order;
 import com.capg.foodonlinedelivery.entities.OrderDetails;
+import com.capg.foodonlinedelivery.model.OrderDetailsDTO;
 
 public interface IOrderService {
 public Order addOrder(Order order);
@@ -14,16 +15,16 @@ public Order addOrder(Order order);
 	
 	public String removeOrderById(OrderDetails order);
 	
-	public OrderDetails viewOrderById(int id);
+	public OrderDetailsDTO viewOrderById(int id);
 	
-	public Optional<OrderDetails> viewAllOrdersByCustomer(int id);
+	public OrderDetailsDTO viewAllOrdersByCustomer(int id);
 	
-	public List<OrderDetails> viewAllOrdersByRestaurant(String resName);
+	public List<OrderDetailsDTO> viewAllOrdersByRestaurant(String resName);
 
 	void removeOrderById(int id);
 
-	OrderDetails updateOrder(OrderDetails order);
+	OrderDetailsDTO updateOrder(OrderDetails order);
 
 }
-
+//
 

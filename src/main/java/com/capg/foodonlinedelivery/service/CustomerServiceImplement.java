@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capg.foodonlinedelivery.entities.Customer;
+import com.capg.foodonlinedelivery.model.CustomerDTO;
 import com.capg.foodonlinedelivery.repository.ICustomerRepository;
+import com.capg.foodonlinedelivery.utils.CustomerUtils;
 
 @Service
 public class CustomerServiceImplement implements ICustomerService {
@@ -15,15 +17,19 @@ public class CustomerServiceImplement implements ICustomerService {
 	ICustomerRepository repo;
 
 	@Override
-	public Customer addCustomer(Customer customer) {
+	public CustomerDTO addCustomer(Customer customer) {
 
-		return repo.save(customer);
+		Customer customer1 = repo.save(customer);
+		CustomerDTO customerDto = CustomerUtils.convertToCustomerDto(customer1);
+		return customerDto;
 	}
 
 	@Override
-	public Customer updateCustomer(Customer customer) {
+	public CustomerDTO updateCustomer(Customer customer) {
 
-		return repo.save(customer);
+		Customer customer1 = repo.save(customer);
+		CustomerDTO customerDto = CustomerUtils.convertToCustomerDto(customer1);
+		return customerDto;
 	}
 
 	@Override
@@ -33,15 +39,19 @@ public class CustomerServiceImplement implements ICustomerService {
 	}
 
 	@Override
-	public List<Customer> viewAllCustomers() {
+	public List<CustomerDTO> viewAllCustomers() {
 
-		return repo.findAll();
+		List<Customer> list = repo.findAll();
+		List<CustomerDTO> listdto = CustomerUtils.convertToCustomerDtoList(list);
+		return listdto;
 	}
 
 	@Override
-	public Customer viewCustomerById(int customerId) {
+	public CustomerDTO viewCustomerById(int customerId) {
 		
-		return  repo.findById(customerId);
+		Customer customer = repo.findById(customerId);
+		CustomerDTO customerDto = CustomerUtils.convertToCustomerDto(customer);
+		return customerDto;
 	}
 
 

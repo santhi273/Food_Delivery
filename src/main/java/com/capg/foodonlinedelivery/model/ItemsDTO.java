@@ -14,20 +14,20 @@ import com.capg.foodonlinedelivery.entities.Restaurant;
 
 public class ItemsDTO {
 
-private Integer itemId;
+private String itemId;
 private String itemName;
 private Category category;
 private Integer quantity;
 private double cost;
-private List<RestaurantDTO> restaurant=new ArrayList<>();
+private List<Restaurant> restaurant=new ArrayList<>();
 
 
 
 public ItemsDTO() {
 	super();
 }
-public ItemsDTO(Integer itemId, String itemName, Category category, Integer quantity, double cost,
-		List<RestaurantDTO> restaurant) {
+public ItemsDTO(String itemId, String itemName, Category category, Integer quantity, double cost,
+		List<Restaurant> restaurant) {
 	super();
 	this.itemId = itemId;
 	this.itemName = itemName;
@@ -36,10 +36,10 @@ public ItemsDTO(Integer itemId, String itemName, Category category, Integer quan
 	this.cost = cost;
 	this.restaurant = restaurant;
 }
-public Integer getItemId() {
+public String getItemId() {
 	return itemId;
 }
-public void setItemId(Integer itemId) {
+public void setItemId(String itemId) {
 	this.itemId = itemId;
 }
 public String getItemName() {
@@ -66,10 +66,10 @@ public double getCost() {
 public void setCost(double cost) {
 	this.cost = cost;
 }
-public List<RestaurantDTO> getRestaurant() {
+public List<Restaurant> getRestaurant() {
 	return restaurant;
 }
-public void setRestaurant(List<RestaurantDTO> restaurant) {
+public void setRestaurant(List<Restaurant> restaurant) {
 	this.restaurant = restaurant;
 }
 

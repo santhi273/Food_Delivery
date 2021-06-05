@@ -13,3 +13,4 @@ public interface IOrderRepository extends JpaRepository<OrderDetails, Integer> {
 	List<OrderDetails> findByName(String restaurantName);
 
 }
+//
