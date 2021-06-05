@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,26 +21,35 @@ import com.capg.foodonlinedelivery.service.ICategoryService;
 public class CategoryController {
 	@Autowired
 	ICategoryService service;
-	@PostMapping(value = "/add", consumes = {"application/json"}, produces = {"application/json"})
-	public CategoryDTO addCategory(Category category) {
-		
+	@PostMapping(value = "/add")
+
+
+
+	public CategoryDTO addCategory(@RequestBody Category category) {
+
 		return service.addCategory(category);
 	}
 	
 	@PutMapping(value = "/update")
-	public CategoryDTO updateCategory(Category category) {
+
+
+
+	public CategoryDTO updateCategory(@RequestBody Category category) {
+
 		
 		return service.updateCategory(category);
 	}
 	
 	@GetMapping(value = "/get/{Id}")
-	public CategoryDTO viewCategoryById(String categoryId) {
+
+
+	public CategoryDTO viewCategoryById(@PathVariable String categoryId) {
 		
 		return service.viewCategoryById(categoryId);
 	}
 	
 	@DeleteMapping(value = "/delete")
-	public void removeCategory(Category category) {
+	public void removeCategory(@PathVariable Category category) {
 		
 		 service.removeCategory(category);
 		 
