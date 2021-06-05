@@ -33,8 +33,9 @@ public class RestaurantController {
 	}
 
 	@DeleteMapping(value = "/delete")
-	public void removeRestaurant(Restaurant restaurant) {
-		service.removeRestaurant(restaurant);
+	public String removeRestaurantById(Integer restaurantId) {
+		service.removeRestaurantById(restaurantId);
+		return "restaurant removed";
 	}
 
 	@GetMapping(value = "/get")

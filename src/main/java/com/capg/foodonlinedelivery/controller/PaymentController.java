@@ -54,7 +54,7 @@ public class PaymentController {
 		return service.viewPayment(startDate, endDate);
 	}
 
-	public PaymentDTO calculateTotalCost(double payment) {
+	public Double calculateTotalCost(Payment payment) {
 		return service.calculateTotalCost(payment);
 	}
 }

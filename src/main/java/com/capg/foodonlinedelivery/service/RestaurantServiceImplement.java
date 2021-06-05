@@ -4,14 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.entities.Restaurant;
 import com.capg.foodonlinedelivery.model.RestaurantDTO;
+import com.capg.foodonlinedelivery.repository.IItemRepository;
 import com.capg.foodonlinedelivery.repository.IRestaurantRepository;
 import com.capg.foodonlinedelivery.utils.RestaurantUtils;
 
 public class RestaurantServiceImplement implements IRestaurantService {
 	@Autowired
 	IRestaurantRepository repository;
+	@Autowired
+	IItemRepository repo2;
 
 	@Override
 	public RestaurantDTO addRestaurant(Restaurant restaurant) {
@@ -27,10 +31,18 @@ public class RestaurantServiceImplement implements IRestaurantService {
 		return restaurantDto;
 	}
 
+	
 	@Override
-	public void removeRestaurant(Restaurant restaurant) {
-     repository.delete(restaurant);
+	public String removeRestaurantById(Integer restaurantId) {
+		Restaurant restaurant=repository.findById(restaurantId).orElse(null);
+        List<Items> list=repo2.findItemsByRestaurant(restaurant.getRestaurantName());	
+	for(int i = 0;i<list.size();i++)
+	{
+		repo2.deleteById(list.get(i).getItemId());
 	}
+	repository.deleteById(restaurantId);
+	return "deleted successfully";
+}
 
 	@Override
 	public List<RestaurantDTO> viewRestaurant() {
