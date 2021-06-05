@@ -2,7 +2,10 @@ package com.capg.foodonlinedelivery.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
+=======
 
+>>>>>>> d4a3a2b8c8c3b053465e401661c43346ba0527bb
 import com.capg.foodonlinedelivery.entities.Customer;
 import com.capg.foodonlinedelivery.model.CustomerDTO;
 

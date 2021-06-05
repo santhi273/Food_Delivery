@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class FoodCart {
 	@Id
-private String cartId;
+    private String cartId;
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="foodcart")
 	@JoinTable(name="item_id")
 	private List<Items> itemList;
