@@ -16,14 +16,10 @@ import javax.validation.constraints.Size;
 @Entity
 public class Restaurant {
 	@Id
-<<<<<<< HEAD
 	@GeneratedValue(generator="restaurant_seq",strategy=GenerationType.SEQUENCE)
 	private Integer restaurantId;
 	@NotEmpty(message = "Enter valid restaurant name")
 	@Size(min = 2,max = 10,message = "Name should be within range")
-=======
-	private Integer restaurantId;
->>>>>>> b1d1648e9bc0a8d413b70af5422f11025f3b7892
 	private String restaurantName;
 	private String managerName;
 	private long phoneNumber;
