@@ -14,39 +14,42 @@ import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.model.FoodCartDTO;
 import com.capg.foodonlinedelivery.service.ICartService;
+
 @RestController
 @RequestMapping("/Food/cart")
 public class CartController {
 	@Autowired
-ICartService service;
+	ICartService service;
+
 	@PostMapping("/add")
-	public FoodCartDTO additemToCart(@RequestBody FoodCart cart,Items item)
-	{
-		return service.additemToCart(cart, item);		
+	public FoodCartDTO additemToCart(@RequestBody FoodCart cart, Items item) {
+		return service.additemToCart(cart, item);
 	}
-	@PutMapping(value="/addquantity/{cart}/{item}/{quantity}")
+
+	@PutMapping(value = "/addquantity/{cart}/{item}/{quantity}")
 	public FoodCartDTO increaseQuantity(FoodCart cart, Items item, int quantity) {
 		return service.increaseQuantity(cart, item, quantity);
 	}
-	@PutMapping(value="/reducequantity/{cart}/{item}/{quantity}")
+
+	@PutMapping(value = "/reducequantity/{cart}/{item}/{quantity}")
 	public FoodCartDTO reduceQuantity(FoodCart cart, Items item, int quantity) {
 		return service.reduceQuantity(cart, item, quantity);
 	}
-	@DeleteMapping(value="/delete/{cart}")
-	public ResponseEntity<String> clearCart(@PathVariable FoodCart cart){
+
+	@DeleteMapping(value = "/delete/{cart}")
+	public ResponseEntity<String> clearCart(@PathVariable FoodCart cart) {
 		service.clearCart(cart);
 		return new ResponseEntity<String>("Cart Cleared", HttpStatus.OK);
 	}
-	
-	
-	@DeleteMapping(value="/delete/{cart}/{item}")
-	
-	public ResponseEntity<String> deleteItem(@PathVariable FoodCart cart ,Items item) {
-		
-		service.removeItem(cart,item);
-		
+
+	@DeleteMapping(value = "/delete/{cart}/{item}")
+
+	public ResponseEntity<String> deleteItem(@PathVariable FoodCart cart, Items item) {
+
+		service.removeItem(cart, item);
+
 		return new ResponseEntity<String>("Employee Deleted", HttpStatus.OK);
-		
+
 	}
-	
+
 }
