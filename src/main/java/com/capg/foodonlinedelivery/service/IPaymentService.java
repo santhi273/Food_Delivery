@@ -14,5 +14,5 @@ public interface IPaymentService {
 	public List<PaymentDTO> viewPayment(LocalDate startDate,LocalDate endDate);
 	public PaymentDTO viewPaymentById(String paymentId);
 	public Double calculateTotalCost(Payment payment);
-	public PaymentDTO addPayment(OrderDetails order);
+   public PaymentDTO addPayment(OrderDetails order);
 }

@@ -4,23 +4,25 @@ import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Digits;
 
 @Entity
 public class Payment {
-	@Id
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
 private String paymentId;
 private LocalDateTime paymentDate;
 @OneToOne(cascade=CascadeType.ALL)
 @JoinTable(name="order_id")
 private OrderDetails order;
+@Digits(fraction = 0, integer = 3)
 private Integer totalItem;
 private Double totalCost;
-
-
-
 
 public Payment() {
 	super();

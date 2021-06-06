@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capg.foodonlinedelivery.entities.OrderDetails;
 import com.capg.foodonlinedelivery.entities.Payment;
 import com.capg.foodonlinedelivery.model.PaymentDTO;
 import com.capg.foodonlinedelivery.service.IPaymentService;
-
 @RestController
 @RequestMapping("/api/Payment")
 public class PaymentController {
@@ -23,9 +23,9 @@ public class PaymentController {
 	IPaymentService service;
 
 	@PostMapping(value = "/add", consumes = { "application/json" }, produces = { "application/json" })
-	public PaymentDTO addPayment(@RequestBody Payment payment) {
+	public PaymentDTO addPayment(@RequestBody OrderDetails order) {
 
-		return service.addPayment(payment);
+		return service.addPayment(order);
 	}
 
 	@PutMapping(value = "/update")

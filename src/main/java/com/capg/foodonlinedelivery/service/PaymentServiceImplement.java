@@ -4,18 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.capg.foodonlinedelivery.entities.Customer;
 import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.entities.OrderDetails;
 import com.capg.foodonlinedelivery.entities.Payment;
 import com.capg.foodonlinedelivery.model.PaymentDTO;
-import com.capg.foodonlinedelivery.repository.IOrderRepository;
 import com.capg.foodonlinedelivery.repository.IPaymentRepository;
 import com.capg.foodonlinedelivery.utils.PaymentUtils;
 
@@ -24,8 +20,9 @@ public class PaymentServiceImplement implements IPaymentService {
 	@Autowired
 	IPaymentRepository repository;
 	FoodCart foodcart;
-	Items item;
 
+
+	
 	@Override
 	public PaymentDTO addPayment(OrderDetails order) {
 		Payment payment=new Payment();
@@ -41,15 +38,13 @@ public class PaymentServiceImplement implements IPaymentService {
 		payment.setTotalItem(totalItems);
 		payment.setTotalCost(sum);
        Payment payment1=repository.save(payment);
-        PaymentDTO paymentDto=PaymentUtils.convertToPaymentDto(payment1);
-		return paymentDto;
+        return PaymentUtils.convertToPaymentDto(payment1);
 	}
 
 	@Override
 	public PaymentDTO updatePayment(Payment payment) {
 		Payment payment1 = repository.save(payment);
-		PaymentDTO paymentDto = PaymentUtils.convertToPaymentDto(payment1);
-		return paymentDto;
+		return  PaymentUtils.convertToPaymentDto(payment1);
 	}
 
 	@Override
@@ -59,8 +54,7 @@ public class PaymentServiceImplement implements IPaymentService {
    @Override
 	public PaymentDTO viewPaymentById(String paymentId) {
 		Payment payment1 = repository.findById(paymentId).orElse(null);
-		PaymentDTO paymentDto = PaymentUtils.convertToPaymentDto(payment1);
-		return paymentDto;
+		return PaymentUtils.convertToPaymentDto(payment1);
 	}
 
 	@Override
@@ -80,6 +74,7 @@ public class PaymentServiceImplement implements IPaymentService {
 	@Override
 	public Double calculateTotalCost(Payment payment) {
 		return payment.getTotalCost();
+	
 	}
 
 }

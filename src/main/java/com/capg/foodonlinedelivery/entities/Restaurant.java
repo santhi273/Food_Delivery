@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Restaurant {
 	@Id
-private Integer restaurantId;
+	@GeneratedValue(generator="restaurant_seq",strategy=GenerationType.SEQUENCE)
+	private Integer restaurantId;
+	@NotEmpty(message = "Enter valid restaurant name")
+	@Size(min = 2,max = 10,message = "Name should be within range")
 	private String restaurantName;
 	private String managerName;
 	private long phoneNumber;
