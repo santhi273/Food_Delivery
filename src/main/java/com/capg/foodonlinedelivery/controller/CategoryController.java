@@ -21,44 +21,39 @@ import com.capg.foodonlinedelivery.service.ICategoryService;
 public class CategoryController {
 	@Autowired
 	ICategoryService service;
+
 	@PostMapping(value = "/add")
-
-
 
 	public CategoryDTO addCategory(@RequestBody Category category) {
 
 		return service.addCategory(category);
 	}
-	
+
 	@PutMapping(value = "/update")
-
-
 
 	public CategoryDTO updateCategory(@RequestBody Category category) {
 
-		
 		return service.updateCategory(category);
 	}
-	
+
 	@GetMapping(value = "/get/{Id}")
 
-
 	public CategoryDTO viewCategoryById(@PathVariable String categoryId) {
-		
+
 		return service.viewCategoryById(categoryId);
 	}
-	
+
 	@DeleteMapping(value = "/delete")
 	public void removeCategory(@PathVariable Category category) {
-		
-		 service.removeCategory(category);
-		 
-	}	 
-	
+
+		service.removeCategory(category);
+
+	}
+
 	@GetMapping(value = "/get/Category")
-	public List<CategoryDTO> viewAllCategory(){
-		
+	public List<CategoryDTO> viewAllCategory() {
+
 		return service.viewAllCategory();
 	}
 
-    }
+}
