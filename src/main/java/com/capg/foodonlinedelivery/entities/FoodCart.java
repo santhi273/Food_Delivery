@@ -4,14 +4,19 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class FoodCart {
 	@Id
+	@GeneratedValue(generator="FoodCart_sequence",strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="FoodCart_sequence",sequenceName="FoodCart_sequence",allocationSize=1)
     private String cartId;
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="foodcart")
 	@JoinTable(name="item_id")
