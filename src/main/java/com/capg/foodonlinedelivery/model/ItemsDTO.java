@@ -1,13 +1,5 @@
 package com.capg.foodonlinedelivery.model;
-
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 
 import com.capg.foodonlinedelivery.entities.Category;
 import com.capg.foodonlinedelivery.entities.Restaurant;
@@ -19,22 +11,41 @@ public class ItemsDTO {
 	private Category category;
 	private Integer quantity;
 	private double cost;
-	private List<Restaurant> restaurant = new ArrayList<>();
+	private List<Restaurant> restaurantList;
+	private Restaurant restaurant;
 
 	public ItemsDTO() {
 		super();
 	}
 
+	
 	public ItemsDTO(String itemId, String itemName, Category category, Integer quantity, double cost,
-			List<Restaurant> restaurant) {
+			List<Restaurant> restaurantList, Restaurant restaurant) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
 		this.category = category;
 		this.quantity = quantity;
 		this.cost = cost;
+		this.restaurantList = restaurantList;
 		this.restaurant = restaurant;
 	}
+
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+
+	public List<Restaurant> getRestaurantList() {
+		return restaurantList;
+	}
+
+
+	public void setRestaurantList(List<Restaurant> restaurantList) {
+		this.restaurantList = restaurantList;
+	}
+
 
 	public String getItemId() {
 		return itemId;
@@ -76,12 +87,10 @@ public class ItemsDTO {
 		this.cost = cost;
 	}
 
-	public List<Restaurant> getRestaurant() {
+	public Restaurant getRestaurant() {
 		return restaurant;
+		
 	}
 
-	public void setRestaurant(List<Restaurant> restaurant) {
-		this.restaurant = restaurant;
-	}
-
+	
 }

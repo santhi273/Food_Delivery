@@ -26,8 +26,8 @@ public class CartServiceImplement implements ICartService {
 		foodCart=repo.save(cart);
 		}
 		else {
-		int newRestaurantId=item.getRestaurant().get(0).getRestaurantId();
-		int oldRestaurantId=cart.getItemList().get(0).getRestaurant().get(0).getRestaurantId();
+		int newRestaurantId=item.getRestaurant().getRestaurantId();
+		int oldRestaurantId=cart.getItemList().get(0).getRestaurant().getRestaurantId();
 		if(newRestaurantId==oldRestaurantId)
 		{
 			cart.getItemList().add(item);

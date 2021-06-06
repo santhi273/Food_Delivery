@@ -1,11 +1,16 @@
 package com.capg.foodonlinedelivery.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Address {
 	@Id
+	@GeneratedValue(generator="address_seq",strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="address_seq",sequenceName="address_seq",allocationSize=1)
 private String addressId;
 private String city;
 private Integer dNo;

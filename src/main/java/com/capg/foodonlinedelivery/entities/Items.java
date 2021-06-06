@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,24 +23,36 @@ public class Items {
 	private Category category;
 	private Integer quantity;
 	private double cost;
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "Items_Restaurant", joinColumns = { @JoinColumn(name = "item_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "restaurant_id") })
-	private List<Restaurant> restaurant = new ArrayList<>();
+	private List<Restaurant> restaurantList = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name="restaurant_id")
+	private Restaurant restaurant;
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
 
 	public Items() {
 		super();
 	}
 
 	public Items(String itemId, String itemName, Category category, Integer quantity, double cost,
-			List<Restaurant> restaurant) {
+			List<Restaurant> restaurantList,Restaurant restaurant) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
 		this.category = category;
 		this.quantity = quantity;
 		this.cost = cost;
-		this.restaurant = restaurant;
+		this.restaurantList = restaurantList;
+		this.restaurant=restaurant;
 	}
 
 	public String getItemId() {
@@ -82,12 +95,12 @@ public class Items {
 		this.cost = cost;
 	}
 
-	public List<Restaurant> getRestaurant() {
-		return restaurant;
+	public List<Restaurant> getRestaurantList() {
+		return restaurantList;
 	}
 
-	public void setRestaurant(List<Restaurant> restaurant) {
-		this.restaurant = restaurant;
+	public void setRestaurantList(List<Restaurant> restaurantList) {
+		this.restaurantList = restaurantList;
 	}
 
 }

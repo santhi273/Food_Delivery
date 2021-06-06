@@ -36,6 +36,7 @@ public class ItemsUtils {
 		itemsdto.setQuantity(items.getQuantity());
 		itemsdto.setCost(items.getCost());
 		itemsdto.setRestaurant(items.getRestaurant());
+		itemsdto.setRestaurantList(items.getRestaurantList());
 		return itemsdto;
 	}
 }
