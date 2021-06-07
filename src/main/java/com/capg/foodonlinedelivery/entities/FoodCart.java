@@ -18,7 +18,7 @@ public class FoodCart {
 	@GeneratedValue(generator = "FoodCart_sequence", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "FoodCart_sequence", sequenceName = "FoodCart_sequence", allocationSize = 1)
 	private String cartId;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "foodcart")
+	@OneToMany
 	@JoinTable(name = "item_id")
 	private List<Items> itemList;
 	@OneToOne(cascade = CascadeType.ALL)

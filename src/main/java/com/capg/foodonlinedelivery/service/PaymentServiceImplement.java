@@ -26,7 +26,7 @@ public class PaymentServiceImplement implements IPaymentService {
 	@Override
 	public PaymentDTO addPayment(OrderDetails order) {
 		Payment payment=new Payment();
-		List<Items> list=order.getCart().getItemList();
+		List<Items> list=order.getList();
 		int totalItems=list.size();
 		double sum=0.0;
 		for(int i=0;i<totalItems;i++) {
