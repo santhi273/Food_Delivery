@@ -12,8 +12,6 @@ import com.capg.foodonlinedelivery.entities.Address;
 @Component
 public class CustomerDTO {
 	
-	@GeneratedValue(generator="customer_seq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq", allocationSize = 1)
 	private Integer customerId;
 	@NotEmpty(message = "First Name should not be empty")
 	@Size(min = 4, max = 15)

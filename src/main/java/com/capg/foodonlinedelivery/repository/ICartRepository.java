@@ -10,7 +10,7 @@ import com.capg.foodonlinedelivery.entities.FoodCart;
 @Repository
 public interface ICartRepository extends JpaRepository<FoodCart, String> {
 
-	public String findCartByCustomerId(int customerId);
+	public FoodCart findCartByCustomerId(int customerId);
 
 	public Optional<FoodCart> findById(FoodCart cartId);
 
