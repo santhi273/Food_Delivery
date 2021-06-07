@@ -14,33 +14,30 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Items {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private String itemId;
-	@NotBlank(message="Name should be required.")
 	private String itemName;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "category_id")
 	private Category category;
-	@NotEmpty
-	@Digits(fraction = 0, integer = 2)
 	private Integer quantity;
-	@Digits(fraction = 0, integer = 3)
 	private double cost;
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToOne
+	@JoinTable(name = "Item_Id")
+	private FoodCart cart;
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Items_Restaurant", joinColumns = { @JoinColumn(name = "item_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "restaurant_id") })
 	private List<Restaurant> restaurantList = new ArrayList<>();
-	
+
 	@ManyToOne
-	@JoinColumn(name="restaurant_id")
+	@JoinColumn(name = "restaurant_id")
 	private Restaurant restaurant;
+
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
@@ -54,7 +51,7 @@ public class Items {
 	}
 
 	public Items(String itemId, String itemName, Category category, Integer quantity, double cost,
-			List<Restaurant> restaurantList,Restaurant restaurant) {
+			List<Restaurant> restaurantList, Restaurant restaurant) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
@@ -62,7 +59,7 @@ public class Items {
 		this.quantity = quantity;
 		this.cost = cost;
 		this.restaurantList = restaurantList;
-		this.restaurant=restaurant;
+		this.restaurant = restaurant;
 	}
 
 	public String getItemId() {

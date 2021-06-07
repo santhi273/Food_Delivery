@@ -10,5 +10,6 @@ public interface ICartService {
 	public FoodCartDTO reduceQuantity(FoodCart cart,Items item,int quantity);
 	public String removeItem(FoodCart cart, Items item);
 	public  String clearCart(FoodCart cart);
-	Items getItemById(int itemId);
+	FoodCart getCartById(String cartId);
+	Items getItemById(String itemId);
 }

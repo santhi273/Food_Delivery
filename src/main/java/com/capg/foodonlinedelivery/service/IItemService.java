@@ -10,14 +10,12 @@ public interface IItemService {
 
 	public ItemsDTO updateItems(Items items);
 
-	public ItemsDTO viewItemsById(Integer id);
+	public ItemsDTO viewItemsById(String itemId);
 
 	public void removeItems(Items items);
 
 	public List<ItemsDTO> viewAllItemssByCategory(String name);
 
 	public List<ItemsDTO> findItemssByRestaurant(String name);
-
-	public List<ItemsDTO> viewAllItemssByItemsName(String name);
 
 }

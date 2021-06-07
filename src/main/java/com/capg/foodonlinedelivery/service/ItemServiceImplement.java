@@ -30,8 +30,8 @@ public class ItemServiceImplement implements IItemService {
 	}
 
 	@Override
-	public ItemsDTO viewItemsById(Integer id) {
-		Items items1 = repository.findById(id).orElse(null);
+	public ItemsDTO viewItemsById(String itemId) {
+		Items items1 = repository.findByItemId(itemId);
 		return ItemsUtils.convertToItemsDto(items1);
 
 	}
@@ -51,14 +51,6 @@ public class ItemServiceImplement implements IItemService {
 
 	@Override
 	public List<ItemsDTO> findItemssByRestaurant(String name) {
-		List<Items> list = repository.findItemsByRestaurant(name);
-		return ItemsUtils.convertToItemsDtoList(list);
-
-	}
-
-	@Override
-	public List<ItemsDTO> viewAllItemssByItemsName(String name) {
-
 		List<Items> list = repository.findItemsByRestaurant(name);
 		return ItemsUtils.convertToItemsDtoList(list);
 
