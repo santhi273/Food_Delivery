@@ -13,7 +13,6 @@ public class Category {
 	@GeneratedValue(generator = "category_sequence", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "category_sequence", sequenceName = "category_sequence", allocationSize = 1)
 	private String categoryId;
-	@NotEmpty(message = "Category name should not be empty..")
 	private String categoryName;
 
 	public Category(String categoryId, String categoryName) {
