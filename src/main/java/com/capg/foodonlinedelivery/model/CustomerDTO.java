@@ -1,18 +1,30 @@
 package com.capg.foodonlinedelivery.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import org.springframework.stereotype.Component;
-
 import com.capg.foodonlinedelivery.entities.Address;
 
 @Component
 public class CustomerDTO {
-
+	
+	@GeneratedValue(generator="customer_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq", allocationSize = 1)
 	private Integer customerId;
+	@NotEmpty(message = "First Name should not be empty")
+	@Size(min = 4, max = 15)
 	private String firstName;
+	@Size(min = 2, max = 15)
 	private String lastName;
+	@Email(message = "Enter a Valid Email")
 	private String emailId;
 	private Address address;
 	private String gender;
+	@Size(min = 10, max = 10)
 	private Long phoneNumber;
 
 	public CustomerDTO() {

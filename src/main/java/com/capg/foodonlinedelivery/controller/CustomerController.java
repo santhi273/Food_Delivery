@@ -21,19 +21,19 @@ public class CustomerController {
 	@Autowired
 	ICustomerService service;
 
-	@PostMapping(value = "/addCustomer", consumes = { "application/json" }, produces = { "application/json" })
+	@PostMapping(value = "/add", consumes = { "application/json" }, produces = { "application/json" })
 	public CustomerDTO addCustomer(@RequestBody Customer customer) {
 
 		return service.addCustomer(customer);
 	}
 
-	@PutMapping(value = "/updateCustomer")
+	@PutMapping(value = "/update")
 	public CustomerDTO updateCustomer(@RequestBody Customer customer) {
 
 		return service.updateCustomer(customer);
 	}
 
-	@GetMapping(value = "/getCustomers")
+	@GetMapping(value = "/get")
 	public List<CustomerDTO> viewAllCustomers() {
 
 		return service.viewAllCustomers();
@@ -45,7 +45,7 @@ public class CustomerController {
 		service.deleteCustomerById(customerId);
 	}
 
-	@GetMapping(value = "/getCustomer/{Id}")
+	@GetMapping(value = "/get/{Id}")
 	public CustomerDTO viewCustomerById(@PathVariable int customerId) {
 
 		return service.viewCustomerById(customerId);
