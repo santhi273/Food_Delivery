@@ -33,6 +33,9 @@ public class Items {
 	private Integer quantity;
 	@Digits(fraction = 0, integer = 3)
 	private double cost;
+	@ManyToOne
+	@JoinTable(name="Item_Id")
+	private FoodCart cart;
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "Items_Restaurant", joinColumns = { @JoinColumn(name = "item_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "restaurant_id") })

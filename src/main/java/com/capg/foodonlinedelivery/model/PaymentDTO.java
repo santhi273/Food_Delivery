@@ -1,9 +1,7 @@
 package com.capg.foodonlinedelivery.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
+import javax.validation.constraints.Digits;
 
 import com.capg.foodonlinedelivery.entities.OrderDetails;
 
@@ -12,7 +10,8 @@ public class PaymentDTO {
 	private String paymentId;
 	private LocalDateTime paymentDate;
 	private OrderDetails order;
-	private Integer totalItem;
+	@Digits(fraction = 0, integer = 3)
+    private Integer totalItem;
 	private Double totalCost;
 
 	public PaymentDTO() {

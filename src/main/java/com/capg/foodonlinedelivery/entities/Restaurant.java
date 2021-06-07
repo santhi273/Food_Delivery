@@ -18,8 +18,6 @@ public class Restaurant {
 	@Id
 	@GeneratedValue(generator="restaurant_seq",strategy=GenerationType.SEQUENCE)
 	private Integer restaurantId;
-	@NotEmpty(message = "Enter valid restaurant name")
-	@Size(min = 2,max = 10,message = "Name should be within range")
 	private String restaurantName;
 	private String managerName;
 	private long phoneNumber;
