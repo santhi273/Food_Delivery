@@ -13,9 +13,5 @@ import com.capg.foodonlinedelivery.entities.FoodCart;
 @Repository
 public interface ICartRepository extends JpaRepository<FoodCart, String> {
 	@Query("select c.cartId from FoodCart c where c.customer.customerId=?1")
-	public String findCartByCustomerId(int customerId);
-
-
-
-
+	public FoodCart findCartByCustomerId(int customerId);
 }

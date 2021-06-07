@@ -86,7 +86,7 @@ public class CartServiceImplement implements ICartService {
 			cart.getItemList().remove(index);
 		}
 		cart.setItemList(cart.getItemList());
-		repo.save(cart);
+		repo.delete(cart);
 		return " item removed successfully....";
 	}
 
