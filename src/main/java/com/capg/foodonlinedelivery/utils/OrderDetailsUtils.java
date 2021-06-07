@@ -20,6 +20,9 @@ public class OrderDetailsUtils {
 		OrderDetails.setOrderId(OrderDetailsdto.getOrderId());
 		OrderDetails.setOrderDate(OrderDetailsdto.getOrderDate());
 		OrderDetails.setOrderStatus(OrderDetailsdto.getOrderStatus());
+		OrderDetails.setList(OrderDetailsdto.getList());
+		OrderDetails.setCustomer(OrderDetailsdto.getCustomer());
+		OrderDetails.setRestaurant(OrderDetailsdto.getRestaurant());
 		return OrderDetails;
 	}
 	
@@ -29,7 +32,9 @@ public class OrderDetailsUtils {
 			OrderDetailsdto.setOrderId(OrderDetails.getOrderId());
 			OrderDetailsdto.setOrderDate(OrderDetails.getOrderDate());
 			OrderDetailsdto.setOrderStatus(OrderDetails.getOrderStatus());
-			OrderDetailsdto.setCart(OrderDetails.getCart());
+			OrderDetailsdto.setList(OrderDetails.getList());
+			OrderDetailsdto.setCustomer(OrderDetails.getCustomer());
+			OrderDetailsdto.setRestaurant(OrderDetails.getRestaurant());
 			
 			return OrderDetailsdto;
 		}
