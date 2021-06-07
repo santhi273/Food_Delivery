@@ -6,22 +6,32 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Items {
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private String itemId;
+	@NotBlank(message="Name should be required.")
 	private String itemName;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "category_id")
 	private Category category;
+	@NotEmpty
+	@Digits(fraction = 0, integer = 2)
 	private Integer quantity;
+	@Digits(fraction = 0, integer = 3)
 	private double cost;
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "Items_Restaurant", joinColumns = { @JoinColumn(name = "item_id") }, inverseJoinColumns = {
