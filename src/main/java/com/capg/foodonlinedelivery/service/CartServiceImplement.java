@@ -86,7 +86,7 @@ public class CartServiceImplement implements ICartService {
 			cart.getItemList().remove(index);
 		}
 		cart.setItemList(cart.getItemList());
-		repo.save(cart);
+		repo.delete(cart);
 		return " item removed successfully....";
 	}
 
@@ -96,11 +96,13 @@ public class CartServiceImplement implements ICartService {
 			return "cart cleared";
 			
 	}
+
+	@Override
 	public FoodCart getCartById(String cartId) {
 		return repo.findById(cartId).orElse(null);
 	}
 	@Override
-	public Items getItemById(int itemId) {
+	public Items getItemById(String itemId) {
 		return repo1.findById(itemId).orElse(null);
 	}
 }

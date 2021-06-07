@@ -37,14 +37,13 @@ public abstract class OrderServiceImplement implements IOrderService {
 		OrderDetailsDTO orderDetailsDto = OrderDetailsUtils.convertToOrderDetailsDto(order1);
 		return orderDetailsDto;
 	}*/
-	public OrderDetailsDTO addOrder(FoodCart cartId) {
+	public OrderDetailsDTO addOrder(FoodCart cart) {
 		
 		//logger.info("Inside service add order method");
 		OrderDetails order = new OrderDetails();
 		//OrderDetailsDTO orderDetailsDto = OrderDetailsUtils.convertToOrderDetailsDto(order1);
 		//return orderDetailsDto;
 		//OrderDetailsDTO order=new OrderDetailsDTO();
-		FoodCart cart=repo2.findById(cartId).orElse(null);
 		List<Items> orderList=new ArrayList<Items>();
 		
 		List<Items> item1=cart.getItemList();
@@ -61,7 +60,7 @@ public abstract class OrderServiceImplement implements IOrderService {
 		order.setOrderDate(LocalDateTime.now());
 		order.setOrderStatus("Pending");
 		repo.save(order);
-		service.clearCart(cartId);	
+		service.clearCart(cart);	
 		OrderDetailsDTO orderDetailsDto = OrderDetailsUtils.convertToOrderDetailsDto(order);
 		return orderDetailsDto;
 	}
