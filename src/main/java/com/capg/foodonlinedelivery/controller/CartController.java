@@ -31,7 +31,7 @@ public class CartController {
 		
 		if(cart1==null) {
 			logger.error("Exception");
-			throw new DistinctRestaurantException();
+			throw new DistinctRestaurantException("You cannot add items from different restuarant.");
 		}
 		
 		return cart1;
@@ -48,7 +48,7 @@ public class CartController {
 		FoodCartDTO cart=service.reduceQuantity(cartId, itemId, quantity);
 		if(cart==null) {
 			logger.error("Exception");
-			throw new RemoveFailedException();
+			throw new RemoveFailedException("Item Id is not present in cart !");
 		}
 		return cart;
 	}
@@ -64,7 +64,7 @@ public class CartController {
 	public ResponseEntity<String> deleteItem(@PathVariable FoodCart cart,@PathVariable Items item) throws RemoveFailedException {
 		if(cart==null) {
 			logger.error("Exception");
-			throw new RemoveFailedException();
+			throw new RemoveFailedException("Item Id is not present in cart !");
 		}
 		service.removeItem(cart, item);
 

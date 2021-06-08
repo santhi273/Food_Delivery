@@ -25,7 +25,7 @@ import com.capg.foodonlinedelivery.service.ICategoryService;
 public class CategoryController {
 	@Autowired
 	ICategoryService service;
-	Logger logger=LoggerFactory.getLogger(CartController.class);
+	Logger logger=LoggerFactory.getLogger(CategoryController.class);
 	@PostMapping(value = "/add")
 
 	public CategoryDTO addCategory(@RequestBody Category category) {
@@ -40,7 +40,7 @@ public class CategoryController {
 		CategoryDTO category1=service.updateCategory(category);
 		if(category1==null) {
 			logger.error("Exception");
-			throw new IdNotFoundException();
+			throw new IdNotFoundException("Invalid category for update !");
 		}
 		return service.updateCategory(category);
 	}
@@ -51,7 +51,7 @@ public class CategoryController {
 		logger.info("Inside view category By Id Controller method");
 		CategoryDTO category1=service.viewCategoryById(categoryId);
 		if(category1==null) {
-			throw new IdNotFoundException();
+			throw new IdNotFoundException("Delete category failed !");
 		}
 		return category1;
 	}
@@ -61,7 +61,7 @@ public class CategoryController {
 		logger.info("Inside remove category Controller method");
 		CategoryDTO category1=service.viewCategoryById(categoryId);
 		if(category1==null) {
-			throw new RemoveFailedException();
+			throw new RemoveFailedException("Category id not found !");
 		}
 		service.removeCategory(categoryId);
 

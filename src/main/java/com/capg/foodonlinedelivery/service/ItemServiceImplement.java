@@ -41,23 +41,22 @@ public class ItemServiceImplement implements IItemService {
 		repository.delete(items);
 
 	}
-
 	@Override
-	public List<ItemsDTO> viewAllItemssByCategory(String name) {
+	public List<ItemsDTO> viewAllItemsByCategory(String name) {
 		List<Items> list = repository.findItemsByCategory(name);
 		return ItemsUtils.convertToItemsDtoList(list);
 
 	}
 
 	@Override
-	public List<ItemsDTO> findItemssByRestaurant(String name) {
+	public List<ItemsDTO> findItemsByRestaurant(String name) {
 		List<Items> list = repository.findItemsByRestaurant(name);
 		return ItemsUtils.convertToItemsDtoList(list);
 
 	}
 
 	@Override
-	public List<ItemsDTO> viewAllItemssByItemsName(String name) {
+	public List<ItemsDTO> viewAllItemsByItemsName(String name) {
 
 		List<Items> list = repository.findItemsByRestaurant(name);
 		return ItemsUtils.convertToItemsDtoList(list);
