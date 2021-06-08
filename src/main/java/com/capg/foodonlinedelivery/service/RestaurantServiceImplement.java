@@ -15,7 +15,7 @@ public class RestaurantServiceImplement implements IRestaurantService {
 	@Autowired
 	IRestaurantRepository repository;
 	@Autowired
-	IItemRepository repo2;
+	IItemRepository repository2;
 
 	@Override
 	public RestaurantDTO addRestaurant(Restaurant restaurant) {
@@ -35,10 +35,10 @@ public class RestaurantServiceImplement implements IRestaurantService {
 	@Override
 	public String removeRestaurantById(Integer restaurantId) {
 		Restaurant restaurant=repository.findById(restaurantId).orElse(null);
-        List<Items> list=repo2.findItemsByRestaurant(restaurant.getRestaurantName());	
+        List<Items> list=repository2.findItemsByRestaurant(restaurant.getRestaurantName());	
 	for(int i = 0;i<list.size();i++)
 	{
-		repo2.deleteById(list.get(i).getItemId());
+		repository2.deleteById(list.get(i).getItemId());
 	}
 	repository.deleteById(restaurantId);
 	return "deleted successfully";

@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.capg.foodonlinedelivery.entities.Address;
 import com.capg.foodonlinedelivery.entities.Items;
@@ -13,6 +15,8 @@ import com.capg.foodonlinedelivery.entities.Items;
 public class RestaurantDTO {
 
 	private Integer restaurantId;
+	@NotEmpty(message = "Enter valid restaurant name")
+	@Size(min = 2,max = 10,message = "Name should be within range")
 	private String restaurantName;
 	private String managerName;
 	private long phoneNumber;

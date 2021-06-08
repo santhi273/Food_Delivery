@@ -12,7 +12,7 @@ public interface ICustomerService {
 	
 	public CustomerDTO updateCustomer(Customer customer);
 	
-	public void deleteCustomerById(int customerId);
+	public String deleteCustomerById(int customerId);
 	
 	public List<CustomerDTO> viewAllCustomers();
 

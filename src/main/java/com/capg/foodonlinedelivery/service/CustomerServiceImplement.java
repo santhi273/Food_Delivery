@@ -41,11 +41,12 @@ public class CustomerServiceImplement implements ICustomerService {
 	}
 
 	@Override
-	public void deleteCustomerById(int customerId) {
+	public String deleteCustomerById(int customerId) {
 		
-		String cartId = repo1.findCartByCustomerId(customerId);
-		repo1.deleteById(cartId);
+		FoodCart cart = repo1.findCartByCustomerId(customerId);
+		repo1.delete(cart);
 		repo.deleteById(customerId);
+		return "Customer Deleted Successfully";
 	}
 
 	@Override
