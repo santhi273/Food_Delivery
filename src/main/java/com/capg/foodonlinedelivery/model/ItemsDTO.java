@@ -1,15 +1,25 @@
 package com.capg.foodonlinedelivery.model;
 import java.util.List;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.stereotype.Component;
+
 import com.capg.foodonlinedelivery.entities.Category;
 import com.capg.foodonlinedelivery.entities.Restaurant;
-
+@Component
 public class ItemsDTO {
 
 	private String itemId;
+	@NotBlank(message="Name should be required.")
 	private String itemName;
 	private Category category;
+	@NotEmpty
+	@Digits(fraction = 0, integer = 2)
 	private Integer quantity;
+	@Digits(fraction = 0, integer = 3)
 	private double cost;
 	private List<Restaurant> restaurantList;
 	private Restaurant restaurant;
