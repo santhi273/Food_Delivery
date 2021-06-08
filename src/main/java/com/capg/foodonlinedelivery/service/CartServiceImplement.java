@@ -1,7 +1,10 @@
 package com.capg.foodonlinedelivery.service;
 
+
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +18,17 @@ import com.capg.foodonlinedelivery.utils.FoodCartUtils;
 @Transactional
 public class CartServiceImplement implements ICartService {
 	@Autowired
-	ICartRepository repo;
+	ICartRepository cartRepository;
 	@Autowired
-	IItemRepository repo1;
+	IItemRepository itemRepository;
+	Logger logger=LoggerFactory.getLogger(CartServiceImplement.class);
 	@Override
 	public FoodCartDTO additemToCart(FoodCart cart,Items item) {
+		logger.info("Inside add item to cart method");
 		FoodCart foodCart=new FoodCart();
 		if(cart.getItemList().size()==0) {
 		cart.getItemList().add(item);
-		foodCart=repo.save(cart);
+		foodCart=cartRepository.save(cart);
 		}
 		else {
 		int newRestaurantId=item.getRestaurant().getRestaurantId();
@@ -31,7 +36,7 @@ public class CartServiceImplement implements ICartService {
 		if(newRestaurantId==oldRestaurantId)
 		{
 			cart.getItemList().add(item);
-			foodCart=repo.save(cart);
+			foodCart=cartRepository.save(cart);
 		}
 		}
 		return FoodCartUtils.convertToFoodCartDto(foodCart);
@@ -39,18 +44,20 @@ public class CartServiceImplement implements ICartService {
 	}
 
 	@Override
-	public FoodCartDTO increaseQuantity(FoodCart cart, Items item, int quantity) {
+	public FoodCartDTO increaseQuantity(String cartId, String itemId, int quantity) {
+		logger.info("Inside icrease quantity method");
+		FoodCart cart=cartRepository.getById(cartId);
 		int size= cart.getItemList().size();
 		int count=0;
 		for(int i=0;i<size;i++) {
 			String id =cart.getItemList().get(i).getItemId();
-			if(item.getItemId()==id) {
+			if(itemId==id) {
 				count++;
 			}
 		}
 		if(count>0) {
 			for(int i=0;i<quantity;i++) {
-				additemToCart(cart,item);
+				additemToCart(cart,itemRepository.getById(itemId));
 			}
 			FoodCart cart1= cart;
 			return FoodCartUtils.convertToFoodCartDto(cart1);
@@ -62,17 +69,20 @@ public class CartServiceImplement implements ICartService {
 	}
 
 	@Override
-	public FoodCartDTO reduceQuantity(FoodCart cart, Items item, int quantity) {
+	public FoodCartDTO reduceQuantity(String cartId, String itemId, int quantity) {
+		logger.info("Inside reduce Quantity method");
+		FoodCart cart=cartRepository.findById(cartId).orElse(null);	
+		Items item=itemRepository.findById(itemId).orElse(null);
 		for(int i=0;i<quantity;i++) {
 			removeItem(cart,item);
 		}
-		FoodCart cart1= cart;
-		return FoodCartUtils.convertToFoodCartDto(cart1);
+		return FoodCartUtils.convertToFoodCartDto(cart);
 		 
 	}
 
 	@Override
 	public String removeItem(FoodCart cart, Items item) {
+		logger.info("Inside remove item method");
 		int size= cart.getItemList().size();
 		int isPresent=0,index=0;
 		for(int i=0;i<size;i++) {
@@ -86,12 +96,13 @@ public class CartServiceImplement implements ICartService {
 			cart.getItemList().remove(index);
 		}
 		cart.setItemList(cart.getItemList());
-		repo.delete(cart);
+		cartRepository.delete(cart);
 		return " item removed successfully....";
 	}
 
 	@Override
 	public String clearCart(FoodCart cart) {
+		logger.info("Inside clear method");
 			cart.getItemList().clear();
 			return "cart cleared";
 			
@@ -99,10 +110,12 @@ public class CartServiceImplement implements ICartService {
 
 	@Override
 	public FoodCart getCartById(String cartId) {
-		return repo.findById(cartId).orElse(null);
+		logger.info("Inside get cart by id method");
+		return cartRepository.findById(cartId).orElse(null);
 	}
 	@Override
 	public Items getItemById(String itemId) {
-		return repo1.findById(itemId).orElse(null);
+		logger.info("Inside get item by id method");
+		return itemRepository.findById(itemId).orElse(null);
 	}
 }
