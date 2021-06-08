@@ -2,6 +2,8 @@ package com.capg.foodonlinedelivery.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.foodonlinedelivery.entities.Category;
+import com.capg.foodonlinedelivery.exceptionhandler.IdNotFoundException;
+import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.CategoryDTO;
 import com.capg.foodonlinedelivery.service.ICategoryService;
 
@@ -21,32 +25,45 @@ import com.capg.foodonlinedelivery.service.ICategoryService;
 public class CategoryController {
 	@Autowired
 	ICategoryService service;
-
+	Logger logger=LoggerFactory.getLogger(CartController.class);
 	@PostMapping(value = "/add")
 
 	public CategoryDTO addCategory(@RequestBody Category category) {
-
+		logger.info("Inside add category Controller method");
 		return service.addCategory(category);
 	}
 
 	@PutMapping(value = "/update")
 
-	public CategoryDTO updateCategory(@RequestBody Category category) {
-
+	public CategoryDTO updateCategory(@RequestBody Category category) throws IdNotFoundException {
+		logger.info("Inside add category Controller method");
+		CategoryDTO category1=service.updateCategory(category);
+		if(category1==null) {
+			logger.error("Exception");
+			throw new IdNotFoundException();
+		}
 		return service.updateCategory(category);
 	}
 
-	@GetMapping(value = "/get/{Id}")
+	@GetMapping(value = "/get/{categoryId}")
 
-	public CategoryDTO viewCategoryById(@PathVariable String categoryId) {
-
-		return service.viewCategoryById(categoryId);
+	public CategoryDTO viewCategoryById(@PathVariable String categoryId) throws IdNotFoundException {
+		logger.info("Inside view category By Id Controller method");
+		CategoryDTO category1=service.viewCategoryById(categoryId);
+		if(category1==null) {
+			throw new IdNotFoundException();
+		}
+		return category1;
 	}
 
-	@DeleteMapping(value = "/delete")
-	public void removeCategory(@PathVariable Category category) {
-
-		service.removeCategory(category);
+	@DeleteMapping(value = "/delete/{categoryId}")
+	public void removeCategory(@PathVariable String categoryId) throws RemoveFailedException{
+		logger.info("Inside remove category Controller method");
+		CategoryDTO category1=service.viewCategoryById(categoryId);
+		if(category1==null) {
+			throw new RemoveFailedException();
+		}
+		service.removeCategory(categoryId);
 
 	}
 

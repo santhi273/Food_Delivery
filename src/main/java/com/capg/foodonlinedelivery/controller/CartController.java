@@ -1,5 +1,7 @@
 package com.capg.foodonlinedelivery.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.entities.Items;
+import com.capg.foodonlinedelivery.exceptionhandler.DistinctRestaurantException;
+import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.FoodCartDTO;
 import com.capg.foodonlinedelivery.service.ICartService;
 
@@ -20,23 +24,36 @@ import com.capg.foodonlinedelivery.service.ICartService;
 public class CartController {
 	@Autowired
 	ICartService service;
-
+	Logger logger=LoggerFactory.getLogger(CartController.class);
 	@PostMapping("/add")
-	public FoodCartDTO additemToCart(@RequestBody FoodCart cart, Items item) {
-		return service.additemToCart(cart, item);
+	public FoodCartDTO additemToCart(@RequestBody FoodCart cart,@RequestBody Items item) throws DistinctRestaurantException {
+		FoodCartDTO cart1=service.additemToCart(cart, item);
+		
+		if(cart1==null) {
+			logger.error("Exception");
+			throw new DistinctRestaurantException();
+		}
+		
+		return cart1;
 	}
 
-	@PutMapping(value = "/addquantity/{cart}/{item}/{quantity}")
-	public FoodCartDTO increaseQuantity(FoodCart cart, Items item, int quantity) {
-		return service.increaseQuantity(cart, item, quantity);
+	@PutMapping(value = "/addquantity/{cartId}/{itemId}/{quantity}")
+	public FoodCartDTO increaseQuantity(@PathVariable String cartId,@PathVariable String itemId,@PathVariable int quantity) {
+		
+		return service.increaseQuantity(cartId, itemId, quantity);
 	}
 
-	@PutMapping(value = "/reducequantity/{cart}/{item}/{quantity}")
-	public FoodCartDTO reduceQuantity(FoodCart cart, Items item, int quantity) {
-		return service.reduceQuantity(cart, item, quantity);
+	@PutMapping(value = "/reducequantity/{cartId}/{itemId}/{quantity}")
+	public FoodCartDTO reduceQuantity(@PathVariable String cartId,@PathVariable String itemId,@PathVariable int quantity) throws RemoveFailedException {
+		FoodCartDTO cart=service.reduceQuantity(cartId, itemId, quantity);
+		if(cart==null) {
+			logger.error("Exception");
+			throw new RemoveFailedException();
+		}
+		return cart;
 	}
 
-	@DeleteMapping(value = "/delete/{cart}")
+	@DeleteMapping(value = "/clear/{cart}")
 	public ResponseEntity<String> clearCart(@PathVariable FoodCart cart) {
 		service.clearCart(cart);
 		return new ResponseEntity<String>("Cart Cleared", HttpStatus.OK);
@@ -44,8 +61,11 @@ public class CartController {
 
 	@DeleteMapping(value = "/delete/{cart}/{item}")
 
-	public ResponseEntity<String> deleteItem(@PathVariable FoodCart cart, Items item) {
-
+	public ResponseEntity<String> deleteItem(@PathVariable FoodCart cart,@PathVariable Items item) throws RemoveFailedException {
+		if(cart==null) {
+			logger.error("Exception");
+			throw new RemoveFailedException();
+		}
 		service.removeItem(cart, item);
 
 		return new ResponseEntity<String>("Employee Deleted", HttpStatus.OK);
