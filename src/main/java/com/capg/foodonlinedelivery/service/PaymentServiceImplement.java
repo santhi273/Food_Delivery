@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +22,12 @@ public class PaymentServiceImplement implements IPaymentService {
 	@Autowired
 	IPaymentRepository repository;
 	FoodCart foodcart;
+	Logger logger=LoggerFactory.getLogger(PaymentServiceImplement.class);
 
-
-	
 	@Override
 	public PaymentDTO addPayment(OrderDetails order) {
+		logger.info("Inside service add payment method");
+
 		Payment payment=new Payment();
 		List<Items> list=order.getList();
 		int totalItems=list.size();
@@ -43,28 +46,33 @@ public class PaymentServiceImplement implements IPaymentService {
 
 	@Override
 	public PaymentDTO updatePayment(Payment payment) {
-		Payment payment1 = repository.save(payment);
+		logger.info("Inside service update payment method");
+        Payment payment1 = repository.save(payment);
 		return  PaymentUtils.convertToPaymentDto(payment1);
 	}
 
 	@Override
 	public void removePayment(Payment payment) {
+		logger.info("Inside service remove payment method");
 		repository.delete(payment);
 	}
    @Override
 	public PaymentDTO viewPaymentById(String paymentId) {
+		logger.info("Inside service view payment By Id method");
 		Payment payment1 = repository.findById(paymentId).orElse(null);
 		return PaymentUtils.convertToPaymentDto(payment1);
 	}
 
 	@Override
 	public List<PaymentDTO> viewPaymentByCustomerId(int customerId) {
+		logger.info("Inside service view payment by customer Id method");
 		List<Payment> list = repository.findByCustId(customerId);
 		return PaymentUtils.convertToPaymentDtoList(list);
 	}
 
 	@Override
 	public List<PaymentDTO> viewPayment(LocalDate startDate, LocalDate endDate) {
+		logger.info("Inside service view payment by LocalDate method");
 		LocalDateTime startDateTime = startDate.atTime(0, 0, 0);
 		LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
 		List<Payment> payment = repository.findByPaymentDates(startDateTime, endDateTime);
@@ -73,8 +81,10 @@ public class PaymentServiceImplement implements IPaymentService {
 
 	@Override
 	public Double calculateTotalCost(Payment payment) {
+		logger.info("Inside service calculate total cost method");
 		return payment.getTotalCost();
 	
 	}
 
+	
 }
