@@ -39,59 +39,50 @@ public class CustomerController {
 	}
 
 	@PutMapping(value = "/update")
-	public CustomerDTO updateCustomer(@Valid @RequestBody Customer customer)throws IdNotFoundException {
-		
+	public CustomerDTO updateCustomer(@Valid @RequestBody Customer customer) throws IdNotFoundException {
+
 		logger.info("Inside update customer method");
-		CustomerDTO customer1=service.viewCustomerById(customer.getCustomerId());
-		if(customer1==null)
-		{
+		CustomerDTO customer1 = service.viewCustomerById(customer.getCustomerId());
+		if (customer1 == null) {
 			throw new IdNotFoundException("Customer id not found to update !!!");
-		}
-		else
-		{
-			CustomerDTO customer2=service.updateCustomer(customer);
-     		return customer2;
+		} else {
+			CustomerDTO customer2 = service.updateCustomer(customer);
+			return customer2;
 		}
 	}
 
 	@GetMapping(value = "/get")
-	public List<CustomerDTO> viewAllCustomers()throws invalidNameException {
+	public List<CustomerDTO> viewAllCustomers() throws invalidNameException {
 		logger.info("Inside view customer by restaurant name method");
-	    List<CustomerDTO> customer=service.viewAllCustomers();
-	    if(customer.isEmpty())
-	    {
-	    	throw new invalidNameException("Invalid restaurant name !!!");
-	    }
-	    return customer;
+		List<CustomerDTO> customer = service.viewAllCustomers();
+		if (customer.isEmpty()) {
+			throw new invalidNameException("Invalid restaurant name !!!");
+		}
+		return customer;
 	}
 
 	@DeleteMapping(value = "/delete/{Id}")
-	public ResponseEntity<String> deleteCustomerById(@PathVariable int customerId)throws removeFailedException{
+	public ResponseEntity<String> deleteCustomerById(@PathVariable int customerId) throws removeFailedException {
 		logger.info("Inside delete customer method");
-		CustomerDTO customer1=service.viewCustomerById(customerId);
-		if(customer1==null)
-		{
+		CustomerDTO customer1 = service.viewCustomerById(customerId);
+		if (customer1 == null) {
 			throw new removeFailedException("Delete customer operation failed !!!");
-		}
-		else
-		{
+		} else {
 
-		String result = service.deleteCustomerById(customerId);
-		return new ResponseEntity<String>(result,HttpStatus.OK);
+			String result = service.deleteCustomerById(customerId);
+			return new ResponseEntity<String>(result, HttpStatus.OK);
 		}
-		
+
 	}
 
 	@GetMapping(value = "/get/{Id}")
-	public CustomerDTO viewCustomerById(@PathVariable int customerId)throws IdNotFoundException {
+	public CustomerDTO viewCustomerById(@PathVariable int customerId) throws IdNotFoundException {
 
 		logger.info("Inside view customer by Id method");
-		CustomerDTO customer=service.viewCustomerById(customerId);
-	    if(customer==null)
-	    {
-	    	throw new IdNotFoundException("Customer Id not found !!!");
-	    }
-
+		CustomerDTO customer = service.viewCustomerById(customerId);
+		if (customer == null) {
+			throw new IdNotFoundException("Customer Id not found !!!");
+		}
 		return customer;
 	}
 
