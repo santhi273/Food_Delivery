@@ -1,7 +1,9 @@
 package com.capg.foodonlinedelivery.controller;
 
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.foodonlinedelivery.entities.Customer;
+import com.capg.foodonlinedelivery.exceptionhandler.IdNotFoundException;
+import com.capg.foodonlinedelivery.exceptionhandler.InvalidNameException;
+import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.CustomerDTO;
 import com.capg.foodonlinedelivery.service.ICustomerService;
 
@@ -51,21 +56,21 @@ public class CustomerController {
 	}
 
 	@GetMapping(value = "/get")
-	public List<CustomerDTO> viewAllCustomers() throws invalidNameException {
+	public List<CustomerDTO> viewAllCustomers() throws InvalidNameException {
 		logger.info("Inside view customer by restaurant name method");
 		List<CustomerDTO> customer = service.viewAllCustomers();
 		if (customer.isEmpty()) {
-			throw new invalidNameException("Invalid restaurant name !!!");
+			throw new InvalidNameException("Invalid restaurant name !!!");
 		}
 		return customer;
 	}
 
 	@DeleteMapping(value = "/delete/{Id}")
-	public ResponseEntity<String> deleteCustomerById(@PathVariable int customerId) throws removeFailedException {
+	public ResponseEntity<String> deleteCustomerById(@PathVariable int customerId) throws RemoveFailedException {
 		logger.info("Inside delete customer method");
 		CustomerDTO customer1 = service.viewCustomerById(customerId);
 		if (customer1 == null) {
-			throw new removeFailedException("Delete customer operation failed !!!");
+			throw new RemoveFailedException("Delete customer operation failed !!!");
 		} else {
 
 			String result = service.deleteCustomerById(customerId);

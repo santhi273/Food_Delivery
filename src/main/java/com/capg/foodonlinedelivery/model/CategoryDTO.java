@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryDTO {
-	private String categoryId;
+	private Integer categoryId;
 	@NotEmpty(message = "Category name should not be empty..")
 	private String categoryName;
 
-	public CategoryDTO(String categoryId, String categoryName) {
+	public CategoryDTO(Integer categoryId, String categoryName) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
@@ -20,11 +20,11 @@ public class CategoryDTO {
 		super();
 	}
 
-	public String getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 

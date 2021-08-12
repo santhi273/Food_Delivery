@@ -12,7 +12,7 @@ public interface IPaymentService {
 	public void removePayment(Payment payment);
 	public List<PaymentDTO> viewPaymentByCustomerId(int customerId);
 	public List<PaymentDTO> viewPayment(LocalDate startDate,LocalDate endDate);
-	public PaymentDTO viewPaymentById(String paymentId);
+	public PaymentDTO viewPaymentById(Integer paymentId);
 	public Double calculateTotalCost(Payment payment);
    public PaymentDTO addPayment(OrderDetails order);
 }

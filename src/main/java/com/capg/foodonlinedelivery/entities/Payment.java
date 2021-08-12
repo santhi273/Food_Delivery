@@ -15,7 +15,7 @@ import javax.validation.constraints.Digits;
 public class Payment {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
-private String paymentId;
+private Integer paymentId;
 private LocalDateTime paymentDate;
 @OneToOne(cascade=CascadeType.ALL)
 @JoinTable(name="order_id")
@@ -27,7 +27,7 @@ private Double totalCost;
 public Payment() {
 	super();
 }
-public Payment(String paymentId, LocalDateTime paymentDate, OrderDetails order, Integer totalItem, Double totalCost) {
+public Payment(Integer paymentId, LocalDateTime paymentDate, OrderDetails order, Integer totalItem, Double totalCost) {
 	super();
 	this.paymentId = paymentId;
 	this.paymentDate = paymentDate;
@@ -35,10 +35,10 @@ public Payment(String paymentId, LocalDateTime paymentDate, OrderDetails order, 
 	this.totalItem = totalItem;
 	this.totalCost = totalCost;
 }
-public String getPaymentId() {
+public Integer getPaymentId() {
 	return paymentId;
 }
-public void setPaymentId(String paymentId) {
+public void setPaymentId(Integer paymentId) {
 	this.paymentId = paymentId;
 }
 public LocalDateTime getPaymentDate() {

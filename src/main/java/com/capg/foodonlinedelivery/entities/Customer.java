@@ -22,14 +22,14 @@ public class Customer {
 	@JoinTable(name="address_id")
 	private Address address;
 	private String gender;
-	private Long phoneNumber;
+	private String phoneNumber;
 	
 	public Customer() {
 		super();
 	}
 	
 	public Customer(Integer customerId, String firstName, String lastName, String emailId, Address address,
-			String gender, Long phoneNumber) {
+			String gender, String phoneNumber) {
 		super();
 		this.customerId = customerId;
 		this.firstName = firstName;
@@ -76,10 +76,10 @@ public class Customer {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public Long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(Long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

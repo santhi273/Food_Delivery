@@ -2,7 +2,7 @@ package com.capg.foodonlinedelivery.model;
 
 public class AddressDTO {
 
-	private String addressId;
+	private Integer addressId;
 	private String city;
 	private Integer dNo;
 	private Long pinCode;
@@ -14,7 +14,7 @@ public class AddressDTO {
 		super();
 	}
 
-	public AddressDTO(String addressId, String city, Integer dNo, Long pinCode, String area, String state,
+	public AddressDTO(Integer addressId, String city, Integer dNo, Long pinCode, String area, String state,
 			String country) {
 		super();
 		this.addressId = addressId;
@@ -26,11 +26,11 @@ public class AddressDTO {
 		this.country = country;
 	}
 
-	public String getAddressId() {
+	public Integer getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(String addressId) {
+	public void setAddressId(Integer addressId) {
 		this.addressId = addressId;
 	}
 

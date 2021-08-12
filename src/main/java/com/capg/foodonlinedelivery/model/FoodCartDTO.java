@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 
 public class FoodCartDTO {
-	private String cartId;
+	private Integer cartId;
 	private List<Items> itemList;
 	private Customer customer;
 
@@ -18,18 +18,18 @@ public class FoodCartDTO {
 		super();
 	}
 
-	public FoodCartDTO(String cartId, List<Items> itemList, Customer customer) {
+	public FoodCartDTO(Integer cartId, List<Items> itemList, Customer customer) {
 		super();
 		this.cartId = cartId;
 		this.itemList = itemList;
 		this.customer = customer;
 	}
 
-	public String getCartId() {
+	public Integer getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(String cartId) {
+	public void setCartId(Integer cartId) {
 		this.cartId = cartId;
 	}
 

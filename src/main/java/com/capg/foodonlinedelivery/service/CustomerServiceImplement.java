@@ -2,8 +2,8 @@ package com.capg.foodonlinedelivery.service;
 
 import java.util.List;
 
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class CustomerServiceImplement implements ICustomerService {
 	ICustomerRepository repo;
 	@Autowired
 	ICartRepository repo1;
-	Logger logger=LoggerFactory.getLogger(CustomerService.class);
+	Logger logger=LoggerFactory.getLogger(CustomerServiceImplement.class);
 
 	@Override
 	public CustomerDTO addCustomer(Customer customer) {

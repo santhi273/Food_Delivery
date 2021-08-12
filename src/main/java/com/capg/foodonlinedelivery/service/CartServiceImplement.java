@@ -13,6 +13,7 @@ import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.model.FoodCartDTO;
 import com.capg.foodonlinedelivery.repository.ICartRepository;
 import com.capg.foodonlinedelivery.repository.IItemRepository;
+import com.capg.foodonlinedelivery.repository.IRestaurantRepository;
 import com.capg.foodonlinedelivery.utils.FoodCartUtils;
 @Service
 @Transactional
@@ -21,6 +22,8 @@ public class CartServiceImplement implements ICartService {
 	ICartRepository cartRepository;
 	@Autowired
 	IItemRepository itemRepository;
+	@Autowired
+	IRestaurantRepository resRepository;
 	Logger logger=LoggerFactory.getLogger(CartServiceImplement.class);
 	@Override
 	public FoodCartDTO additemToCart(FoodCart cart,Items item) {
@@ -31,8 +34,8 @@ public class CartServiceImplement implements ICartService {
 		foodCart=cartRepository.save(cart);
 		}
 		else {
-		int newRestaurantId=item.getRestaurant().getRestaurantId();
-		int oldRestaurantId=cart.getItemList().get(0).getRestaurant().getRestaurantId();
+		int newRestaurantId=item.getRestaurantList().get(0).getRestaurantId();
+		int oldRestaurantId=resRepository.findByItemList_ItemName(item.getItemName()).get(0).getRestaurantId();
 		if(newRestaurantId==oldRestaurantId)
 		{
 			cart.getItemList().add(item);
@@ -44,20 +47,20 @@ public class CartServiceImplement implements ICartService {
 	}
 
 	@Override
-	public FoodCartDTO increaseQuantity(String cartId, String itemId, int quantity) {
+	public FoodCartDTO increaseQuantity(Integer cartId, Integer itemId, int quantity) {
 		logger.info("Inside icrease quantity method");
-		FoodCart cart=cartRepository.getById(cartId);
+		FoodCart cart=cartRepository.findById(itemId).orElse(null);
 		int size= cart.getItemList().size();
 		int count=0;
 		for(int i=0;i<size;i++) {
-			String id =cart.getItemList().get(i).getItemId();
+			Integer id =cart.getItemList().get(i).getItemId();
 			if(itemId==id) {
 				count++;
 			}
 		}
 		if(count>0) {
 			for(int i=0;i<quantity;i++) {
-				additemToCart(cart,itemRepository.getById(itemId));
+				additemToCart(cart,itemRepository.findByItemId(itemId));
 			}
 			FoodCart cart1= cart;
 			return FoodCartUtils.convertToFoodCartDto(cart1);
@@ -69,10 +72,10 @@ public class CartServiceImplement implements ICartService {
 	}
 
 	@Override
-	public FoodCartDTO reduceQuantity(String cartId, String itemId, int quantity) {
+	public FoodCartDTO reduceQuantity(Integer cartId, Integer itemId, int quantity) {
 		logger.info("Inside reduce Quantity method");
 		FoodCart cart=cartRepository.findById(cartId).orElse(null);	
-		Items item=itemRepository.findById(itemId).orElse(null);
+		Items item=itemRepository.findByItemId(itemId);
 		for(int i=0;i<quantity;i++) {
 			removeItem(cart,item);
 		}
@@ -109,13 +112,13 @@ public class CartServiceImplement implements ICartService {
 	}
 
 	@Override
-	public FoodCart getCartById(String cartId) {
+	public FoodCart getCartById(Integer cartId) {
 		logger.info("Inside get cart by id method");
 		return cartRepository.findById(cartId).orElse(null);
 	}
 	@Override
-	public Items getItemById(String itemId) {
+	public Items getItemById(Integer itemId) {
 		logger.info("Inside get item by id method");
-		return itemRepository.findById(itemId).orElse(null);
+		return itemRepository.findByItemId(itemId);
 	}
 }

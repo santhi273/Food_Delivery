@@ -11,10 +11,10 @@ public class Address {
 	@Id
 	@GeneratedValue(generator="address_seq",strategy=GenerationType.SEQUENCE)
 	@SequenceGenerator(name="address_seq",sequenceName="address_seq",allocationSize=1)
-private String addressId;
+private Integer addressId;
 private String city;
 private Integer dNo;
-private Long pinCode;
+private int pinCode;
 private String area;
 private String state;
 private String country;
@@ -22,7 +22,7 @@ private String country;
 public Address() {
 	super();
 }
-public Address(String addressId, String city, Integer dNo, Long pinCode, String area, String state, String country) {
+public Address(Integer addressId, String city, Integer dNo,int pinCode, String area, String state, String country) {
 	super();
 	this.addressId = addressId;
 	this.city = city;
@@ -32,10 +32,10 @@ public Address(String addressId, String city, Integer dNo, Long pinCode, String 
 	this.state = state;
 	this.country = country;
 }
-public String getAddressId() {
+public Integer getAddressId() {
 	return addressId;
 }
-public void setAddressId(String addressId) {
+public void setAddressId(Integer addressId) {
 	this.addressId = addressId;
 }
 public String getCity() {
@@ -50,10 +50,10 @@ public Integer getdNo() {
 public void setdNo(Integer dNo) {
 	this.dNo = dNo;
 }
-public Long getPinCode() {
+public int getPinCode() {
 	return pinCode;
 }
-public void setPinCode(Long pinCode) {
+public void setPinCode(int pinCode) {
 	this.pinCode = pinCode;
 }
 public String getArea() {

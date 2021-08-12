@@ -11,10 +11,10 @@ public class ExceptionGolbalHandler {
 	@ExceptionHandler(InvalidNameException.class)
 	public ResponseEntity<ErrorDetails> invalidNameException(String message,HttpServletRequest request) { 
 		ErrorDetails error=new ErrorDetails();
-			error.setMessage(message);;
+			error.setMessage(message);
 			error.setUrl(request.getRequestURL().toString());
 			
-		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_ACCEPTABLE);
+		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_FOUND);
 	}
 	@ExceptionHandler(InvalidItemNameException.class)
 	public ResponseEntity<ErrorDetails> invalidItemNameException(String message,HttpServletRequest request) { 
@@ -22,7 +22,7 @@ public class ExceptionGolbalHandler {
 			error.setMessage(message);
 			error.setUrl(request.getRequestURL().toString());
 			
-		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_ACCEPTABLE);
+		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_FOUND);
 	}
 	@ExceptionHandler(IdNotFoundException.class)
 	public ResponseEntity<ErrorDetails> idNotFoundException(String message,HttpServletRequest request) { 
@@ -30,7 +30,7 @@ public class ExceptionGolbalHandler {
 			error.setMessage(message);
 			error.setUrl(request.getRequestURL().toString());
 			
-		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_ACCEPTABLE);
+		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_FOUND);
 	}
 	@ExceptionHandler(DistinctRestaurantException.class)
 	public ResponseEntity<ErrorDetails> distinctRestaurantException(String message,HttpServletRequest request) { 
@@ -38,7 +38,7 @@ public class ExceptionGolbalHandler {
 			error.setMessage(message);
 			error.setUrl(request.getRequestURL().toString());
 			
-		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_ACCEPTABLE);
+		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_FOUND);
 	}
 	@ExceptionHandler(RemoveFailedException.class)
 	public ResponseEntity<ErrorDetails> removeFailedException(String message,HttpServletRequest request) { 
@@ -46,6 +46,6 @@ public class ExceptionGolbalHandler {
 			error.setMessage(message);
 			error.setUrl(request.getRequestURL().toString());
 			
-		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_ACCEPTABLE);
+		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_FOUND);
 	}
 }

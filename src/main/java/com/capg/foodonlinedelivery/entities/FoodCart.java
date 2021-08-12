@@ -7,8 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -17,9 +18,9 @@ public class FoodCart {
 	@Id
 	@GeneratedValue(generator = "FoodCart_sequence", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "FoodCart_sequence", sequenceName = "FoodCart_sequence", allocationSize = 1)
-	private String cartId;
-	@OneToMany
-	@JoinTable(name = "item_id")
+	private Integer cartId;
+	@ManyToMany
+	@JoinTable(name="foodcart_items",joinColumns=@JoinColumn(name="foodcart_id"),inverseJoinColumns=@JoinColumn(name="items_id"))
 	private List<Items> itemList;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "customer_id")
@@ -29,18 +30,18 @@ public class FoodCart {
 		super();
 	}
 
-	public FoodCart(String cartId, List<Items> itemList, Customer customer) {
+	public FoodCart(Integer cartId, List<Items> itemList, Customer customer) {
 		super();
 		this.cartId = cartId;
 		this.itemList = itemList;
 		this.customer = customer;
 	}
 
-	public String getCartId() {
+	public Integer getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(String cartId) {
+	public void setCartId(Integer cartId) {
 		this.cartId = cartId;
 	}
 

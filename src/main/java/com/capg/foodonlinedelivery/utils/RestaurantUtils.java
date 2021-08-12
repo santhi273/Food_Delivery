@@ -13,7 +13,7 @@ public class RestaurantUtils {
 			dtolist.add(convertToRestaurantDto(Restaurant));
 		return dtolist;
 	}
-	
+
 	public static Restaurant convertToRestaurant(RestaurantDTO restaurantdto) {
 		Restaurant restaurant = new Restaurant();
 		restaurant.setRestaurantId(restaurantdto.getRestaurantId());

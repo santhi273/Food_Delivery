@@ -1,26 +1,35 @@
 package com.capg.foodonlinedelivery.model;
 import java.util.List;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.stereotype.Component;
+
 import com.capg.foodonlinedelivery.entities.Category;
 import com.capg.foodonlinedelivery.entities.Restaurant;
-
+@Component
 public class ItemsDTO {
 
-	private String itemId;
+	private Integer itemId;
+	@NotBlank(message="Name should be required.")
 	private String itemName;
 	private Category category;
+	@NotEmpty
+	@Digits(fraction = 0, integer = 2)
 	private Integer quantity;
+	@Digits(fraction = 0, integer = 3)
 	private double cost;
 	private List<Restaurant> restaurantList;
-	private Restaurant restaurant;
 
 	public ItemsDTO() {
 		super();
 	}
 
 	
-	public ItemsDTO(String itemId, String itemName, Category category, Integer quantity, double cost,
-			List<Restaurant> restaurantList, Restaurant restaurant) {
+	public ItemsDTO(Integer itemId, String itemName, Category category, Integer quantity, double cost,
+			List<Restaurant> restaurantList) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
@@ -28,14 +37,11 @@ public class ItemsDTO {
 		this.quantity = quantity;
 		this.cost = cost;
 		this.restaurantList = restaurantList;
-		this.restaurant = restaurant;
+	
 	}
 
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
-	}
-
+	
 
 	public List<Restaurant> getRestaurantList() {
 		return restaurantList;
@@ -47,11 +53,11 @@ public class ItemsDTO {
 	}
 
 
-	public String getItemId() {
+	public Integer getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(String itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 
@@ -87,10 +93,6 @@ public class ItemsDTO {
 		this.cost = cost;
 	}
 
-	public Restaurant getRestaurant() {
-		return restaurant;
-		
-	}
-
+	
 	
 }

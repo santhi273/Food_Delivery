@@ -4,6 +4,6 @@ import org.springframework.stereotype.Repository;
 import com.capg.foodonlinedelivery.entities.Category;
 
 @Repository
-public interface ICategoryRepository extends JpaRepository<Category, String> {
+public interface ICategoryRepository extends JpaRepository<Category, Integer> {
 	
 }

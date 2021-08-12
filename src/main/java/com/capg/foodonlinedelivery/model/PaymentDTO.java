@@ -7,7 +7,7 @@ import com.capg.foodonlinedelivery.entities.OrderDetails;
 
 public class PaymentDTO {
 
-	private String paymentId;
+	private Integer paymentId;
 	private LocalDateTime paymentDate;
 	private OrderDetails order;
 	@Digits(fraction = 0, integer = 3)
@@ -18,7 +18,7 @@ public class PaymentDTO {
 		super();
 	}
 
-	public PaymentDTO(String paymentId, LocalDateTime paymentDate, OrderDetails order, Integer totalItem,
+	public PaymentDTO(Integer paymentId, LocalDateTime paymentDate, OrderDetails order, Integer totalItem,
 			Double totalCost) {
 		super();
 		this.paymentId = paymentId;
@@ -28,11 +28,11 @@ public class PaymentDTO {
 		this.totalCost = totalCost;
 	}
 
-	public String getPaymentId() {
+	public Integer getPaymentId() {
 		return paymentId;
 	}
 
-	public void setPaymentId(String paymentId) {
+	public void setPaymentId(Integer paymentId) {
 		this.paymentId = paymentId;
 	}
 

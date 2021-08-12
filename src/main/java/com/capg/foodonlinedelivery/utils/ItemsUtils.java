@@ -24,7 +24,6 @@ public class ItemsUtils {
 		items.setCategory(itemsdto.getCategory());
 		items.setQuantity(itemsdto.getQuantity());
 		items.setCost(itemsdto.getCost());
-		items.setRestaurant(itemsdto.getRestaurant());
 		return items;
 	}
 
@@ -35,7 +34,6 @@ public class ItemsUtils {
 		itemsdto.setCategory(items.getCategory());
 		itemsdto.setQuantity(items.getQuantity());
 		itemsdto.setCost(items.getCost());
-		itemsdto.setRestaurant(items.getRestaurant());
 		itemsdto.setRestaurantList(items.getRestaurantList());
 		return itemsdto;
 	}

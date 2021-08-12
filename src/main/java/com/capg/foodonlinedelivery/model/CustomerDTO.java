@@ -1,8 +1,4 @@
 package com.capg.foodonlinedelivery.model;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -23,14 +19,14 @@ public class CustomerDTO {
 	private Address address;
 	private String gender;
 	@Size(min = 10, max = 10)
-	private Long phoneNumber;
+	private String phoneNumber;
 
 	public CustomerDTO() {
 		super();
 	}
 
 	public CustomerDTO(Integer customerId, String firstName, String lastName, String emailId, Address address,
-			String gender, Long phoneNumber) {
+			String gender, String phoneNumber) {
 		super();
 		this.customerId = customerId;
 		this.firstName = firstName;
@@ -89,11 +85,11 @@ public class CustomerDTO {
 		this.gender = gender;
 	}
 
-	public Long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

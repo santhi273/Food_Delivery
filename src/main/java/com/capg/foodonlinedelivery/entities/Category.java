@@ -12,10 +12,10 @@ public class Category {
 	@Id
 	@GeneratedValue(generator = "category_sequence", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "category_sequence", sequenceName = "category_sequence", allocationSize = 1)
-	private String categoryId;
+	private Integer categoryId;
 	private String categoryName;
 
-	public Category(String categoryId, String categoryName) {
+	public Category(Integer categoryId, String categoryName) {
 		super();
 		this.categoryId = categoryId;
 
@@ -26,11 +26,11 @@ public class Category {
 		super();
 	}
 
-	public String getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 

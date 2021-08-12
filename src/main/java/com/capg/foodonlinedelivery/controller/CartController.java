@@ -38,13 +38,13 @@ public class CartController {
 	}
 
 	@PutMapping(value = "/addquantity/{cartId}/{itemId}/{quantity}")
-	public FoodCartDTO increaseQuantity(@PathVariable String cartId,@PathVariable String itemId,@PathVariable int quantity) {
+	public FoodCartDTO increaseQuantity(@PathVariable Integer cartId,@PathVariable Integer itemId,@PathVariable int quantity) {
 		
 		return service.increaseQuantity(cartId, itemId, quantity);
 	}
 
 	@PutMapping(value = "/reducequantity/{cartId}/{itemId}/{quantity}")
-	public FoodCartDTO reduceQuantity(@PathVariable String cartId,@PathVariable String itemId,@PathVariable int quantity) throws RemoveFailedException {
+	public FoodCartDTO reduceQuantity(@PathVariable Integer cartId,@PathVariable Integer itemId,@PathVariable int quantity) throws RemoveFailedException {
 		FoodCartDTO cart=service.reduceQuantity(cartId, itemId, quantity);
 		if(cart==null) {
 			logger.error("Exception");

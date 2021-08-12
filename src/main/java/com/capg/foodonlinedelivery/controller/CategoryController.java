@@ -47,7 +47,7 @@ public class CategoryController {
 
 	@GetMapping(value = "/get/{categoryId}")
 
-	public CategoryDTO viewCategoryById(@PathVariable String categoryId) throws IdNotFoundException {
+	public CategoryDTO viewCategoryById(@PathVariable Integer categoryId) throws IdNotFoundException {
 		logger.info("Inside view category By Id Controller method");
 		CategoryDTO category1=service.viewCategoryById(categoryId);
 		if(category1==null) {
@@ -57,7 +57,7 @@ public class CategoryController {
 	}
 
 	@DeleteMapping(value = "/delete/{categoryId}")
-	public void removeCategory(@PathVariable String categoryId) throws RemoveFailedException{
+	public void removeCategory(@PathVariable Integer categoryId) throws RemoveFailedException{
 		logger.info("Inside remove category Controller method");
 		CategoryDTO category1=service.viewCategoryById(categoryId);
 		if(category1==null) {

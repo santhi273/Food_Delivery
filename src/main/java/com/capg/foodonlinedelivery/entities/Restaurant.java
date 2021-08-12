@@ -2,16 +2,16 @@ package com.capg.foodonlinedelivery.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Restaurant {
@@ -20,18 +20,19 @@ public class Restaurant {
 	private Integer restaurantId;
 	private String restaurantName;
 	private String managerName;
-	private long phoneNumber;
+	private String phoneNumber;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "address_id")
 	private Address address;
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
+	@ManyToMany
+	@JoinTable(name="restaurant_items",joinColumns=@JoinColumn(name="restaurant_id"),inverseJoinColumns=@JoinColumn(name="item_id"))
 	private List<Items> itemList = new ArrayList<>();
 
 	public Restaurant() {
 		super();
 	}
 
-	public Restaurant(Integer restaurantId, String restaurantName, String managerName, long phoneNumber,
+	public Restaurant(Integer restaurantId, String restaurantName, String managerName, String phoneNumber,
 			Address address, List<Items> itemList) {
 		super();
 		this.restaurantId = restaurantId;
@@ -66,11 +67,11 @@ public class Restaurant {
 		this.managerName = managerName;
 	}
 
-	public long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

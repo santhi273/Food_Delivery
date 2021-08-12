@@ -19,7 +19,7 @@ public class RestaurantDTO {
 	@Size(min = 2,max = 10,message = "Name should be within range")
 	private String restaurantName;
 	private String managerName;
-	private long phoneNumber;
+	private String phoneNumber;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "address_id")
 	private Address address;
@@ -30,7 +30,7 @@ public class RestaurantDTO {
 		super();
 	}
 
-	public RestaurantDTO(Integer restaurantId, String restaurantName, String managerName, long phoneNumber,
+	public RestaurantDTO(Integer restaurantId, String restaurantName, String managerName, String phoneNumber,
 			Address address, List<Items> itemList) {
 		super();
 		this.restaurantId = restaurantId;
@@ -65,11 +65,11 @@ public class RestaurantDTO {
 		this.managerName = managerName;
 	}
 
-	public long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

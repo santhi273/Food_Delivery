@@ -1,18 +1,26 @@
 package com.capg.foodonlinedelivery.repository;
 
 import java.util.List;
-import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.capg.foodonlinedelivery.entities.OrderDetails;
-
+@Repository
 public interface IOrderRepository extends JpaRepository<OrderDetails, Integer> {
 
-	Optional<OrderDetails> findByOrderId(int id);
+@Query("select o from OrderDetails o where o.orderId=:id")
+	
+	OrderDetails findById(@Param("id") int orderId);
 
-	List<OrderDetails> findByName(String restaurantName);
+	@Query("select o from OrderDetails o where o.customer.customerId=:id")
+	public List<OrderDetails> findAllOrdersByCustomer(@Param("id") int id);
 
-	List<OrderDetails> findAllByRestaurant(String restaurantName);
+	
+	@Query("select o from OrderDetails o where o.restaurant.restaurantId="
+			+ "(select r.restaurantId from Restaurant r where r.restaurantName=:name)")
+	public List<OrderDetails> findAllByRestaurant(@Param("name") String resName);
 
 }
-//

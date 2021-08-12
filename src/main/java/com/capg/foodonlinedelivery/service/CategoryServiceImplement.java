@@ -31,14 +31,14 @@ public class CategoryServiceImplement implements ICategoryService {
 	}
 
 	@Override
-	public void removeCategory(String categoryId) {
+	public void removeCategory(Integer categoryId) {
 		logger.info("Inside remove category method");
 		 categoryRepository.deleteById(categoryId);
 	}
 
 	@Override
 	
-	public CategoryDTO viewCategoryById(String categoryId) {
+	public CategoryDTO viewCategoryById(Integer categoryId) {
 		logger.info("Inside view category by category id method");
 		Category category= categoryRepository.findById(categoryId).orElse(new Category());
 		return CategoryUtils.convertToCategoryDto(category);
