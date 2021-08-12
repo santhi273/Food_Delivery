@@ -2,9 +2,12 @@ package com.capg.foodonlinedelivery.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +22,7 @@ import com.capg.foodonlinedelivery.exceptionhandler.IdNotFoundException;
 import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.CategoryDTO;
 import com.capg.foodonlinedelivery.service.ICategoryService;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/Category")
 public class CategoryController {
@@ -35,9 +38,10 @@ public class CategoryController {
 
 	@PutMapping(value = "/update")
 
-	public CategoryDTO updateCategory(@RequestBody Category category) throws IdNotFoundException {
+	public CategoryDTO updateCategory(@Valid @RequestBody Category category) throws IdNotFoundException {
 		logger.info("Inside add category Controller method");
-		CategoryDTO category1=service.updateCategory(category);
+		
+		CategoryDTO category1=service.viewCategoryById(category.getCategoryId());
 		if(category1==null) {
 			logger.error("Exception");
 			throw new IdNotFoundException("Invalid category for update !");

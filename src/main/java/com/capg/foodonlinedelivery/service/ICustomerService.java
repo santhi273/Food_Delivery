@@ -12,10 +12,27 @@ public interface ICustomerService {
 	
 	public CustomerDTO updateCustomer(Customer customer);
 	
-	public String deleteCustomerById(int customerId);
+	public String deleteCustomerById(Integer customerId);
 	
 	public List<CustomerDTO> viewAllCustomers();
 
-	public CustomerDTO viewCustomerById(int customerId);
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: view customer 
+	 * date: 7/6/2021
+	 * param:customer  entity
+	 * return:customerDto 
+	 */
+	CustomerDTO viewCustomerById(Integer customerId);
+
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: delete customer 
+	 * date: 7/6/2021
+	 * param:customer  entity,
+	 * return:string 
+	 */
 	
 }

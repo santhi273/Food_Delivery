@@ -1,73 +1,88 @@
 package com.capg.foodonlinedelivery.service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.capg.foodonlinedelivery.entities.FoodCart;
+import com.capg.foodonlinedelivery.entities.Customer;
 import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.entities.OrderDetails;
+import com.capg.foodonlinedelivery.entities.Payment;
 import com.capg.foodonlinedelivery.entities.Restaurant;
 import com.capg.foodonlinedelivery.model.OrderDetailsDTO;
 import com.capg.foodonlinedelivery.repository.ICartRepository;
+import com.capg.foodonlinedelivery.repository.ICustomerRepository;
 import com.capg.foodonlinedelivery.repository.IItemRepository;
 import com.capg.foodonlinedelivery.repository.IOrderRepository;
+import com.capg.foodonlinedelivery.repository.IPaymentRepository;
 import com.capg.foodonlinedelivery.repository.IRestaurantRepository;
 import com.capg.foodonlinedelivery.utils.OrderDetailsUtils;
+/**
+ * 
+ * @author: sumanth
+ * Description:order service implement  
+ * date: 7/6/2021
+ * param:oderdetails  entity
+ * 
+ * 
+ */
 @Service
-@Transactional
 public class OrderServiceImplement implements IOrderService {
 	@Autowired
 	IOrderRepository repo;
-	
-	
 	@Autowired
 	ICartRepository repo2;
-	
 	@Autowired
 	IItemRepository repo3;	
 	@Autowired
 	IRestaurantRepository repo4;
 	@Autowired
+	IPaymentRepository repo5;
+	@Autowired
+	ICustomerRepository repo6;
+	@Autowired
+	IItemService itemService;
+	@Autowired
+	IPaymentService paymentService;
+	@Autowired
 	CartServiceImplement service;
 	Logger logger=LoggerFactory.getLogger(OrderServiceImplement.class);
-
-@Override
+	/**
+	 * 
+	 * @author: sumanth
+	 * Description:add order 
+	 * date: 7/6/2021
+	 * param:oderdetails  entity
+	 * return :orderdetailsdto
+	 * 
+	 */
+	@Override
 	public OrderDetailsDTO addOrder(OrderDetails order) {
 	logger.info("Inside service add order method");
-	OrderDetails order1=new OrderDetails();
-		FoodCart cart=repo2.findCartByCustomerId(order1.getCustomer().getCustomerId());
-		List<Items> orderList=new ArrayList<Items>();
-		
-		List<Items> item1=cart.getItemList();
-		int list_size=item1.size();
-		for(int i=0;i<list_size;i++)
-		{
-			Items item=item1.get(i);
-			orderList.add(item);
-		}
-		int rest=item1.get(0).getRestaurantList().get(0).getRestaurantId();
-		Restaurant restaurant=repo4.getById(rest);
-		order1.setCustomer(cart.getCustomer());
-		order1.setRestaurant(restaurant);
-		order1.setList(orderList);
-		order1.setOrderDate(LocalDateTime.now());
-		order1.setOrderStatus("Pending");
-		repo.save(order1);
-		service.clearCart(cart);	
-		 return OrderDetailsUtils.convertToOrderDetailsDto(order1);
+	
+	Customer customer=repo6.getById(order.getCustomer().getCustomerId());
+	Restaurant restaurant=repo4.getById(order.getRestaurant().getRestaurantId());
+	List<Items> item=repo3.findAllById(order.getList().stream().map(Items::getItemId).collect(Collectors.toList()));
+	order.setCustomer(customer);
+	order.setList(item);
+	order.setRestaurant(restaurant);
+		repo.save(order);
+		 return OrderDetailsUtils.convertToOrderDetailsDto(order);
 		
 	}
-
-
-
-
+	/**
+	 * 
+	 * @author: sumanth
+	 * Description:update order 
+	 * date: 7/6/2021
+	 * param:oderdetails  entity
+	 * return :orderdetailsdto
+	 * 
+	 */
 	@Override
 	public OrderDetailsDTO updateOrder(OrderDetails order) {
 		logger.info("Inside service update order method");
@@ -75,31 +90,64 @@ public class OrderServiceImplement implements IOrderService {
 		return OrderDetailsUtils.convertToOrderDetailsDto(order1);
 		
 	}
+	/**
+	 * 
+	 * @author: sumanth
+	 * Description:remove order 
+	 * date: 7/6/2021
+	 * param:oderdetails  entity
+	 * return :string
+	 * 
+	 */
 
-	
 	@Override
-	public String  removeOrderById(int OrderId) {
+	public String  removeOrderById(Integer orderId) {
         logger.info("Inside service remove order method");
+       OrderDetails order=repo.getById(orderId);
+       order.setCustomer(null);
+       order.setList(null);
+       order.setRestaurant(null);
+       repo.save(order);
+       Payment payment=repo5.findByorder_OrderId(orderId);
 
-		repo.deleteById(OrderId);
+       repo5.deleteById(payment.getPaymentId());
 		return "Order removed successfully...";
 	}
 
 
-	
+	/**
+	 * 
+	 * @author: sumanth
+	 * Description:view order 
+	 * date: 7/6/2021
+	 * param:oderdetails  entity
+	 * return :orderdetailsdto
+	 * 
+	 */
 
 	@Override
-	public OrderDetailsDTO viewOrderById(int orderId) {
+	public OrderDetailsDTO viewOrderById(Integer orderId) {
 		logger.info("Inside service view order by Id method");
-		OrderDetails order1 = repo.findById(orderId);
+		OrderDetails order1 = repo.findById(orderId).orElse(null);
+		if(order1==null) {
+			return null;
+		}else {
 		return OrderDetailsUtils.convertToOrderDetailsDto(order1);
-		
+		}
 	
 		
 	}
-
+	/**
+	 * 
+	 * @author: sumanth
+	 * Description:view order 
+	 * date: 7/6/2021
+	 * param:oderdetails  entity
+	 * return :list<orderdetailsdto>
+	 * 
+	 */
 	@Override
-	public List<OrderDetailsDTO> viewAllOrdersByCustomer(int customerId) {
+	public List<OrderDetailsDTO> viewAllOrdersByCustomer(Integer customerId) {
 		logger.info("Inside service view all order by customer Id method");
 
 		List<OrderDetails> order1 = repo.findAllOrdersByCustomer(customerId);
@@ -107,12 +155,20 @@ public class OrderServiceImplement implements IOrderService {
 	
 	
 	}
-
+	/**
+	 * 
+	 * @author: sumanth
+	 * Description:view order 
+	 * date: 7/6/2021
+	 * param:oderdetails  entity
+	 * return :list<orderdetailsdto>
+	 * 
+	 */
 	@Override
-	public List<OrderDetailsDTO> viewAllOrdersByRestaurant(String restaurantName) {
+	public List<OrderDetailsDTO> viewAllOrdersByRestaurant(Integer id) {
 		logger.info("Inside service view all order by restaurant name method");
 
-		List<OrderDetails> list =repo.findAllByRestaurant(restaurantName);
+		List<OrderDetails> list =repo.findAllByRestaurant(id);
 		return OrderDetailsUtils.convertToOrderDetailsDtoList(list);
 		
 

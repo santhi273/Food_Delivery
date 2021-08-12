@@ -1,5 +1,6 @@
 package com.capg.foodonlinedelivery.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,13 +8,20 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-
+/**
+ * 
+ * @author: hemalatha
+ * Description:restaurant login Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 public class RestaurantLogin {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int userid;
+	@Column(unique=true)
 	@NotEmpty(message = "Username should not be empty...")
 	private String userName;
 	@NotEmpty(message = "Password should not be empty...")

@@ -10,7 +10,14 @@ import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.CustomerLoginDTO;
 import com.capg.foodonlinedelivery.repository.ICustomerLoginRepository;
 import com.capg.foodonlinedelivery.utils.CustomerLoginUtils;
-
+/**
+ * 
+ * @author: mithila
+ * Description:customer Login service implementation
+ * date: 8/6/2021
+ * param:customer login entity,
+ *
+ */
 @Service
 public class CustomerLoginServiceImplement implements ICustomerLoginService {
 	
@@ -18,7 +25,14 @@ public class CustomerLoginServiceImplement implements ICustomerLoginService {
 	ICustomerLoginRepository repository;
 	
 	Logger logger = LoggerFactory.getLogger(CustomerLoginServiceImplement.class);
-	
+	/**
+	 * 
+	 * @author: mithila
+	 * Description:add customer Login 
+	 * date: 8/6/2021
+	 * param:customer login entity,
+	 *return : customerLoginDto
+	 */
 	@Override
 	public CustomerLoginDTO addCustomerLogin(CustomerLogin login) {
 		
@@ -26,6 +40,14 @@ public class CustomerLoginServiceImplement implements ICustomerLoginService {
 		CustomerLogin customerLogin=repository.save(login);
 		return CustomerLoginUtils.convertToCustomerLoginDto(customerLogin);
 	}
+	/**
+	 * 
+	 * @author: mithila
+	 * Description:delete customer Login 
+	 * date: 8/6/2021
+	 * param:customer login entity,
+	 *return : string
+	 */
 	@Override
 	public String deleteCustomerLogin(int userid) {
 		
@@ -33,7 +55,14 @@ public class CustomerLoginServiceImplement implements ICustomerLoginService {
 		repository.deleteById(userid);
 		return "Customer deleted successfully...";
 	}
-	
+	/**
+	 * 
+	 * @author: mithila
+	 * Description:update customer Login 
+	 * date: 8/6/2021
+	 * param:customer login entity,
+	 *return :customerLoginDto
+	 */
 	@Override
 	public CustomerLoginDTO updateCustomerLogin(CustomerLogin login) {
 		
@@ -41,7 +70,14 @@ public class CustomerLoginServiceImplement implements ICustomerLoginService {
 		CustomerLogin customerLogin=repository.save(login);
 		return CustomerLoginUtils.convertToCustomerLoginDto(customerLogin);	
 	}
-	
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: customer Login 
+	 * date: 8/6/2021
+	 * param:customer login entity,
+	 *return :String
+	 */
 	@Override
 	public String customerLogin(String userName, String password) {
 		
@@ -69,7 +105,14 @@ public class CustomerLoginServiceImplement implements ICustomerLoginService {
 		}
 	}	
 	
-
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: customer Logout 
+	 * date: 8/6/2021
+	 * param:customer login entity,
+	 *return :string
+	 */
 	@Override
 	public String customerLogout() {
 		

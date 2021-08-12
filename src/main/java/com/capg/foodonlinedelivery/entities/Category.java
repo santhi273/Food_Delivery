@@ -6,7 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
-
+/**
+ * 
+ * @author: santhi
+ * Description:address Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 public class Category {
 	@Id

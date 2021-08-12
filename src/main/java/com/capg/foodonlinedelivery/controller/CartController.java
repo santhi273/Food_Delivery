@@ -5,29 +5,31 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.exceptionhandler.DistinctRestaurantException;
 import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.FoodCartDTO;
 import com.capg.foodonlinedelivery.service.ICartService;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/Food/cart")
+@RequestMapping("/food/cart")
 public class CartController {
 	@Autowired
 	ICartService service;
 	Logger logger=LoggerFactory.getLogger(CartController.class);
-	@PostMapping("/add")
-	public FoodCartDTO additemToCart(@RequestBody FoodCart cart,@RequestBody Items item) throws DistinctRestaurantException {
-		FoodCartDTO cart1=service.additemToCart(cart, item);
+	@PostMapping("/{cartId}/add")
+	public FoodCartDTO additemToCart(@PathVariable int cartId,@RequestParam(required=true) int customerId, Items item) throws DistinctRestaurantException {
+		FoodCartDTO cart1=service.additemToCart(cartId,customerId, item);
 		
 		if(cart1==null) {
 			logger.error("Exception");
@@ -53,22 +55,22 @@ public class CartController {
 		return cart;
 	}
 
-	@DeleteMapping(value = "/clear/{cart}")
-	public ResponseEntity<String> clearCart(@PathVariable FoodCart cart) {
-		service.clearCart(cart);
+	@DeleteMapping(value = "/clear/{cartId}")
+	public ResponseEntity<String> clearCart(@PathVariable int cartId) {
+		service.clearCart(cartId);
 		return new ResponseEntity<String>("Cart Cleared", HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/delete/{cart}/{item}")
 
 	public ResponseEntity<String> deleteItem(@PathVariable FoodCart cart,@PathVariable Items item) throws RemoveFailedException {
-		if(cart==null) {
+		if(cart==null||item==null) {
 			logger.error("Exception");
 			throw new RemoveFailedException("Item Id is not present in cart !");
 		}
 		service.removeItem(cart, item);
 
-		return new ResponseEntity<String>("Employee Deleted", HttpStatus.OK);
+		return new ResponseEntity<String>("item removed", HttpStatus.OK);
 
 	}
 

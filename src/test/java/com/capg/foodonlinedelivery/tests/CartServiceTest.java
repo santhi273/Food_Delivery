@@ -24,13 +24,6 @@ class CartServiceTest {
 	
 	@Autowired
 	ICartRepository repository;
-	
-	@Test
-	void testAddItemToCart() {
-		
-		FoodCart cart= repository.save(getCart());
-		assertNotNull(cart);
-	}
 
 	@Test
 	void testIncreaseQuantity() {
@@ -98,12 +91,6 @@ class CartServiceTest {
 		}
 		assertTrue(r);
 	}
-
-	@Test
-	void testClearCart() {
-	}
-	
-	
 	public FoodCart getCart()
 	{
 		FoodCart cart=new FoodCart();
@@ -132,8 +119,8 @@ class CartServiceTest {
 	public Address getAddress()
 	{
 		Address address=new Address();
-		address.setAddressId(null);
-		address.setdNo(null);
+		address.setAddressId(12);
+		address.setdNo(32);
 		address.setArea("Hadapsar");
 		address.setCity("Pune");
 		address.setState("AndhraPradesh");
@@ -145,12 +132,14 @@ class CartServiceTest {
 	public List<Restaurant> getRestaurant()
 	{
 		List<Restaurant> restaurant=new ArrayList<Restaurant>();
-		restaurant.get(0).getRestaurantId();
-		restaurant.get(0).getRestaurantName();
-		restaurant.get(0).getManagerName();
-		restaurant.get(0).getPhoneNumber();
-		restaurant.get(0).getAddress();
-		restaurant.get(0).getItemList();
+		Restaurant restaurant1=new Restaurant();
+		restaurant1.setRestaurantId(12);
+		restaurant1.setRestaurantName("anapurana");
+		restaurant1.setManagerName("santhi");
+		restaurant1.setPhoneNumber("1234567890");
+		restaurant1.setAddress(getAddress());
+		restaurant1.setItemList(null);;
+		restaurant.add(restaurant1);
 		return restaurant;
 	}
 	

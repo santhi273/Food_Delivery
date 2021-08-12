@@ -5,10 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-
+/**
+ * 
+ * @author: mithila
+ * Description:customer Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 public class Customer {
 	@Id
@@ -19,7 +25,7 @@ public class Customer {
 	private String lastName;
 	private String emailId;
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinTable(name="address_id")
+	@JoinColumn(name="address_id")
 	private Address address;
 	private String gender;
 	private String phoneNumber;

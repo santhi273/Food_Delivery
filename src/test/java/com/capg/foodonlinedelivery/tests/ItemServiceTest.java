@@ -34,11 +34,6 @@ public class ItemServiceTest {
 		assertNotNull(item);
 	}
 
-	@Test
-	void testRemoveItems() {
-		
-		repository.deleteById(8);
-	}
 
 	@Test
 	void testFindItemsByRestaurant() {
@@ -53,15 +48,6 @@ public class ItemServiceTest {
 		assertNotNull(list);
 
 	}
-
-	
-
-	@Test
-	void testViewItemsById() {
-		Items item=repository.findById(8).orElse(null);
-		assertNotNull(item);
-	}
-
 	public Items getItem()
 	{
 		Items item=new Items();
@@ -78,12 +64,6 @@ public class ItemServiceTest {
 		public List<Restaurant> getRestaurant()
 		{
 			List<Restaurant> restaurant=new ArrayList<Restaurant>();
-			restaurant.get(0).getRestaurantId();
-			restaurant.get(0).getRestaurantName();
-			restaurant.get(0).getManagerName();
-			restaurant.get(0).getPhoneNumber();
-			restaurant.get(0).getAddress();
-			restaurant.get(0).getItemList();
 			return restaurant;
 		}
 		

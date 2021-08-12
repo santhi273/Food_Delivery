@@ -12,8 +12,16 @@ import com.capg.foodonlinedelivery.entities.FoodCart;
 import com.capg.foodonlinedelivery.model.CustomerDTO;
 import com.capg.foodonlinedelivery.repository.ICartRepository;
 import com.capg.foodonlinedelivery.repository.ICustomerRepository;
+import com.capg.foodonlinedelivery.repository.IOrderRepository;
 import com.capg.foodonlinedelivery.utils.CustomerUtils;
-
+/**
+ * 
+ * @author: mithila
+ * Description: customer service implementation
+ * date: 7/6/2021
+ * param:customer  entity,
+ *
+ */
 @Service
 public class CustomerServiceImplement implements ICustomerService {
 	
@@ -21,8 +29,17 @@ public class CustomerServiceImplement implements ICustomerService {
 	ICustomerRepository repo;
 	@Autowired
 	ICartRepository repo1;
+	@Autowired
+	IOrderRepository orderRepository;
 	Logger logger=LoggerFactory.getLogger(CustomerServiceImplement.class);
-
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: add customer 
+	 * date: 7/6/2021
+	 * param:customer  entity,
+	 * return:customerdto 
+	 */
 	@Override
 	public CustomerDTO addCustomer(Customer customer) {
 		
@@ -35,26 +52,30 @@ public class CustomerServiceImplement implements ICustomerService {
 		return CustomerUtils.convertToCustomerDto(customer1);
 		
 	}
-
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: update customer 
+	 * date: 7/6/2021
+	 * param:customer  entity,
+	 * return:customerdto 
+	 */
 	@Override
 	public CustomerDTO updateCustomer(Customer customer) {
         
 		logger.info("Inside service update customer method");
-		Customer customer1 = repo.save(customer);
+		Customer customer1 = repo.saveAndFlush(customer);
 		return CustomerUtils.convertToCustomerDto(customer1);
 		 
 	}
-
-	@Override
-	public String deleteCustomerById(int customerId) {
-		
-		logger.info("Inside service delete customer method");
-		FoodCart cart = repo1.findCartByCustomerId(customerId);
-		repo1.delete(cart);
-		repo.deleteById(customerId);
-		return "Customer Deleted Successfully";
-	}
-
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: view customer 
+	 * date: 7/6/2021
+	 * param:customer  entity
+	 * return:List<customerDto> 
+	 */
 	@Override
 	public List<CustomerDTO> viewAllCustomers() {
         
@@ -63,15 +84,48 @@ public class CustomerServiceImplement implements ICustomerService {
 		return CustomerUtils.convertToCustomerDtoList(list);
 		 
 	}
-
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: view customer 
+	 * date: 7/6/2021
+	 * param:customer  entity
+	 * return:customerDto 
+	 */
 	@Override
-	public CustomerDTO viewCustomerById(int customerId) {
+	
+	public CustomerDTO viewCustomerById(Integer customerId) {
 		
 		logger.info("Inside service view customer by Id method");
-		Customer customer = repo.findById(customerId);
+		Customer customer = repo.findById(customerId).orElse(null);
+		if(customer==null) {
+			return null;
+		}
+		else {
 		return CustomerUtils.convertToCustomerDto(customer);
-		
+		}
 	}
-
+	/**
+	 * 
+	 * @author: mithila
+	 * Description: delete customer 
+	 * date: 7/6/2021
+	 * param:customer  entity,
+	 * return:string 
+	 */
+	@Override
+	public String deleteCustomerById(Integer customerId) {
+		
+		logger.info("Inside service delete customer method");
+		
+		Customer customer=repo.getById(customerId);
+		FoodCart cart=repo1.findByCustomer_CustomerId(customerId);
+		cart.setCustomer(null);
+		cart.setItemList(null);
+		repo1.save(cart);
+		repo1.deleteById(cart.getCartId());
+		repo.deleteById(customerId);
+		return "Customer Deleted Successfully";
+	}
 
 }

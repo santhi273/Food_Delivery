@@ -10,7 +10,7 @@ public interface IRestaurantLoginService {
 	
 	public RestaurantLogin updateRestaurantLogin(RestaurantLogin login);
 	
-	public  List <RestaurantLogin> deleteRestaurantLogin(int userid);
+	public  void deleteRestaurantLogin(int userid);
 	
 	public String candidateLogin(String username,String password);
 	

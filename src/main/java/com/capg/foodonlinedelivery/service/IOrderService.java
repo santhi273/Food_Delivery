@@ -8,13 +8,13 @@ import com.capg.foodonlinedelivery.model.OrderDetailsDTO;
 
 public interface IOrderService {
 
-public OrderDetailsDTO viewOrderById(int id);
+public OrderDetailsDTO viewOrderById(Integer id);
 
-public List<OrderDetailsDTO> viewAllOrdersByCustomer(int id);
+public List<OrderDetailsDTO> viewAllOrdersByCustomer(Integer id);
 
-public List<OrderDetailsDTO> viewAllOrdersByRestaurant(String resName);
+public List<OrderDetailsDTO> viewAllOrdersByRestaurant(Integer id);
 
-public String removeOrderById(int id);
+public String removeOrderById(Integer id);
 
 public OrderDetailsDTO updateOrder(OrderDetails order);
 

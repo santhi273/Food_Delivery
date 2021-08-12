@@ -7,18 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
-
+/**
+ * 
+ * @author: hemalatha
+ * Description:payment Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 public class Payment {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private Integer paymentId;
 private LocalDateTime paymentDate;
-@OneToOne(cascade=CascadeType.ALL)
-@JoinTable(name="order_id")
+@OneToOne(cascade=CascadeType.ALL,orphanRemoval = true)
+@JoinColumn(name="order_id")
 private OrderDetails order;
 @Digits(fraction = 0, integer = 3)
 private Integer totalItem;

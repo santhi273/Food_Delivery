@@ -1,6 +1,6 @@
 package com.capg.foodonlinedelivery.entities;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,7 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-
+/**
+ * 
+ * @author: hemalatha
+ * Description:restaurant Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 public class Restaurant {
 	@Id
@@ -21,12 +27,13 @@ public class Restaurant {
 	private String restaurantName;
 	private String managerName;
 	private String phoneNumber;
+	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "address_id")
+	@JoinColumn(name = "address_id")
 	private Address address;
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="restaurant_items",joinColumns=@JoinColumn(name="restaurant_id"),inverseJoinColumns=@JoinColumn(name="item_id"))
-	private List<Items> itemList = new ArrayList<>();
+	private List<Items> itemList;
 
 	public Restaurant() {
 		super();

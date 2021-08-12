@@ -12,10 +12,22 @@ public interface IItemService {
 
 	public ItemsDTO viewItemsById(Integer itemId);
 
-	public void removeItems(Items items);
 
 	public List<ItemsDTO> viewAllItemssByCategory(String name);
 
 	public List<ItemsDTO> findItemssByRestaurant(String name);
+
+	/**
+	 * 
+	 * @author: venkatesh
+	 * Description:remove item  
+	 * date: 7/6/2021
+	 * param:item  entity
+	 * return : void
+	 * 
+	 */
+	void removeItems(Integer itemId);
+
+	public List<ItemsDTO> findAllItems();
 
 }

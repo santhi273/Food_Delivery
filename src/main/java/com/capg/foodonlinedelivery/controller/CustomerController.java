@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import com.capg.foodonlinedelivery.exceptionhandler.InvalidNameException;
 import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.CustomerDTO;
 import com.capg.foodonlinedelivery.service.ICustomerService;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
@@ -65,11 +66,12 @@ public class CustomerController {
 		return customer;
 	}
 
-	@DeleteMapping(value = "/delete/{Id}")
-	public ResponseEntity<String> deleteCustomerById(@PathVariable int customerId) throws RemoveFailedException {
+	@DeleteMapping(value = "/delete/{customerId}")
+	public ResponseEntity<String> deleteCustomerById(@PathVariable Integer customerId) throws RemoveFailedException,IdNotFoundException {
 		logger.info("Inside delete customer method");
 		CustomerDTO customer1 = service.viewCustomerById(customerId);
 		if (customer1 == null) {
+			logger.error("error");
 			throw new RemoveFailedException("Delete customer operation failed !!!");
 		} else {
 
@@ -79,12 +81,12 @@ public class CustomerController {
 
 	}
 
-	@GetMapping(value = "/get/{Id}")
-	public CustomerDTO viewCustomerById(@PathVariable int customerId) throws IdNotFoundException {
+	@GetMapping(value = "/get/{customerId}")
+	public CustomerDTO viewCustomerById(@PathVariable Integer customerId) throws IdNotFoundException {
 
 		logger.info("Inside view customer by Id method");
 		CustomerDTO customer = service.viewCustomerById(customerId);
-		if (customer == null) {
+		if (customer== null) {
 			throw new IdNotFoundException("Customer Id not found !!!");
 		}
 		return customer;

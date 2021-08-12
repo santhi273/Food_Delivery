@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.OrderDetailsDTO;
 import com.capg.foodonlinedelivery.service.ICartService;
 import com.capg.foodonlinedelivery.service.IOrderService;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/Order")
 public class OrderController {
@@ -33,8 +34,8 @@ public class OrderController {
 	ICartService cartService;
 
 	org.slf4j.Logger logger=LoggerFactory.getLogger(OrderController.class);
-	@PostMapping(value = "/add", consumes = {"application/json"}, produces = {"application/json"})
-	public OrderDetailsDTO addOrder(OrderDetails order) {
+	@PostMapping(value = "/add")
+	public OrderDetailsDTO addOrder(@RequestBody OrderDetails order) {
 		
 		return service.addOrder(order);
 	}
@@ -57,28 +58,28 @@ public class OrderController {
 	
 	
 	@DeleteMapping(value = "/removeOrderByOrderId/{orderId}")
-	public  ResponseEntity<String> removeOrder(@PathVariable("orderId") int oid) throws RemoveFailedException 
+	public  ResponseEntity<String> removeOrder(@PathVariable Integer orderId) throws RemoveFailedException 
 	{
 		   logger.info("Inside remove order method");
-		   OrderDetailsDTO order1=service.viewOrderById(oid);
+		   OrderDetailsDTO order1=service.viewOrderById(orderId);
 	       if(order1==null)
 		   {
 	    	   throw new RemoveFailedException("Order removal failed !!!");
 	       }
 	       else
 	       {
-	    	   String msg=service.removeOrderById(order1.getOrderId());
+	    	   String msg=service.removeOrderById(orderId);
 	    	   return new ResponseEntity<String>(msg, HttpStatus.OK);
 	       }
 	}
 	
-	@GetMapping(value = "/get/{restaurantName}")
+	@GetMapping(value = "/get/Restauant/{restaurantId}")
 
 		
-		public ResponseEntity<List<OrderDetailsDTO>> viewAllOrdersByRestaurant(@PathVariable("restaurantName") String resName) throws InvalidNameException 
+		public ResponseEntity<List<OrderDetailsDTO>> viewAllOrdersByRestaurant(@PathVariable Integer restaurantId) throws InvalidNameException 
 		{
 			logger.info("Inside view all order by restaurant name method");
-			List<OrderDetailsDTO> order2 = service.viewAllOrdersByRestaurant(resName);
+			List<OrderDetailsDTO> order2 = service.viewAllOrdersByRestaurant(restaurantId);
 			if(order2.isEmpty())
 			{
 				throw new InvalidNameException("Invalid restaurant name !!!");
@@ -92,11 +93,11 @@ public class OrderController {
 		
 
 	
-	@GetMapping(value = "/get/{Id}")
-	public ResponseEntity<List<OrderDetailsDTO>> viewAllOrdersByCustomer(@PathVariable("customerId") int id) throws IdNotFoundException 
+	@GetMapping(value = "/get/Customer/{customerId}")
+	public ResponseEntity<List<OrderDetailsDTO>> viewAllOrdersByCustomer(@PathVariable Integer customerId) throws IdNotFoundException 
 	{
 		logger.info("Inside view all order by customer Id method");
-		List<OrderDetailsDTO> order2 = service.viewAllOrdersByCustomer(id);
+		List<OrderDetailsDTO> order2 = service.viewAllOrdersByCustomer(customerId);
 		if(order2.isEmpty())
 		{
 			throw new IdNotFoundException("Invalid customer !!!");

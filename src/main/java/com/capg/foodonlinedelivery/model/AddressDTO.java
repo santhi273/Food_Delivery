@@ -1,5 +1,8 @@
 package com.capg.foodonlinedelivery.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AddressDTO {
 
 	private Integer addressId;

@@ -14,7 +14,6 @@ public interface IPaymentRepository extends JpaRepository<Payment, Integer> {
 
 	public List<Payment> findByOrderCustomerCustomerId(int customerId);
 
-	@Query("select payment  from Payment payment where payment.paymentDate BETWEEN ?1 AND ?2")
-	public List<Payment> findByPaymentDates(LocalDateTime start, LocalDateTime end);
+	public Payment findByorder_OrderId(int orderId);
 
 }

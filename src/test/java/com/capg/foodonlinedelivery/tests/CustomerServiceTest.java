@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,9 @@ class CustomerServiceTest {
 	}
 
 	@Test
-	void testRemoveCustomerById() {
-	
-		repository.deleteById(10);
-	}
-
-	@Test
 	void testViewCustomerById() {
 
-		Customer customer=repository.findById(1);
+		Optional<Customer> customer=repository.findById(1);
 		assertNotNull(customer);
 	}
 
@@ -58,7 +53,6 @@ class CustomerServiceTest {
 		}
 		assertTrue(res);
 	}
-	
 	
 	public Customer getCustomer()
 	{

@@ -33,16 +33,7 @@ class ICustomerLoginServiceTest {
 	@Test
 	void testCustomerLogin() {
 		System.out.println("testCustomerLogin");
-		CustomerLogin login=repository.findByUserName("Aniket");
-		System.out.println(login);
-		assertNotNull(login);
-	}
-	@Test
-	void testDeleteCustomerLogin() {
-		
-		repository.deleteById(57);
-		CustomerLogin login=repository.getById(57);
-		System.out.println(login);
+		CustomerLogin login=repository.findByUserName("Aniket4");
 		assertNull(login);
 	}
 

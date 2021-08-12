@@ -1,16 +1,25 @@
 package com.capg.foodonlinedelivery.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.validation.constraints.Pattern;
+/**
+ * 
+ * @author: mithila
+ * Description:customer login Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 public class CustomerLogin {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int userId;
+	@Column(unique=true)
 	private String userName;
 	private String password;
 	public CustomerLogin() {

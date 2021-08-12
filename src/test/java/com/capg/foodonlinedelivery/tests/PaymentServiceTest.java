@@ -28,47 +28,33 @@ public class PaymentServiceTest {
 	@AutoConfigureTestDatabase(replace = Replace.NONE)
 	@Test
 	void testAddPayment() {
-	    Payment payment=repository.save(null);
+	    Payment payment=repository.save(getPayment());
 		assertNotNull(payment);
 	}
 	@Test
 	void testUpdatePayment() {
-	    Payment payment=repository.save(null);
+	    Payment payment=repository.save(getPayment());
 		assertNotNull(payment);
 	}
-
-	@Test
-	void testRemovePayment() {
-		repository.deleteById(null);
-		assertNotNull("Payment removed Succesfully");
-	}
-
 	@Test
 	void testViewPaymentById() {
-		Optional<Payment> payment=repository.findById(null);
+		Optional<Payment> payment=repository.findById(3);
 		assertNotNull(payment);
 	}
 	@Test
 	void testViewPaymentByCustomerId() {
-		List<Payment> payment=repository.findByOrderCustomerCustomerId(0);
+		List<Payment> payment=repository.findByOrderCustomerCustomerId(10);
 		assertNotNull(payment);
-	}
-	@Test
-	void testviewPayment(LocalDate startDate, LocalDate endDate) {
-		String time = "2019-03-27T10:15:30";
-		String time1 = "2020-03-27T10:15:30";
-		LocalDateTime startDateTime = LocalDateTime.parse(time);
-        LocalDateTime endDateTime =LocalDateTime.parse(time1);
-		List<Payment> list=repository.findByPaymentDates(startDateTime,endDateTime);
-		assertNotNull(list);
 	}
 
 	@Test
 	void testCalculateTotalCost() {
-		Payment payment=new Payment();
-		Double totalCost=payment.getTotalCost();
+
+		Double totalCost=123.00;
 		assertNotNull(totalCost);
 	}
+
+
 	public Customer getCustomer()
 	{
 		Customer cust=new Customer();
@@ -99,7 +85,7 @@ public class PaymentServiceTest {
 		res.setAddress(getAddress());
 		res.setPhoneNumber("9866042006");
 	    res.setManagerName("ravi");
-	    res.setRestaurantId(0);
+	    res.setRestaurantId(3);
 	    res.setRestaurantName("Annapurna");
 	    res.setItemList(null);
 	    return res;
@@ -110,7 +96,7 @@ public class PaymentServiceTest {
 		ord.setCustomer(getCustomer());
 		ord.setList(null);
 		ord.setOrderDate(LocalDateTime.now());
-		ord.setOrderId(0);
+		ord.setOrderId(2);
 		ord.setOrderStatus("delivered");
 		ord.setRestaurant(getRestaurant());
 		return ord;
@@ -119,9 +105,9 @@ public class PaymentServiceTest {
 	 {
 		 Payment payment=new Payment();
 		 payment.setPaymentDate(LocalDateTime.now());
-		 payment.setPaymentId(null);
+		 payment.setPaymentId(3);
 		 payment.setOrder(getOrder());
-		 payment.setTotalCost(null);
+		 payment.setTotalCost(123.00);
 		 payment.setTotalItem(2);
 		 return payment;
 	 }

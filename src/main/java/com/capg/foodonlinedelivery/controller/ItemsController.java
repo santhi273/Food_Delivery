@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import com.capg.foodonlinedelivery.exceptionhandler.InvalidNameException;
 import com.capg.foodonlinedelivery.exceptionhandler.RemoveFailedException;
 import com.capg.foodonlinedelivery.model.ItemsDTO;
 import com.capg.foodonlinedelivery.service.IItemService;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/items")
 public class ItemsController {
@@ -41,10 +42,11 @@ public class ItemsController {
 	@PutMapping(value = "/updateItems")
 	public ItemsDTO updateItems(@RequestBody Items items) throws IdNotFoundException {
 		logger.info("Inside  update method");
-		ItemsDTO itemsDto = itemService.updateItems(items);
-		if (itemsDto.getItemId() == null) {
+		ItemsDTO itemsDto = itemService.viewItemsById(items.getItemId());
+		if (itemsDto == null) {
 			throw new IdNotFoundException("Unbale to update item due to invalid id");
 		} else {
+			ItemsDTO tiemsDto=itemService.updateItems(items);
 			return itemsDto;
 		}
 	}
@@ -60,28 +62,29 @@ public class ItemsController {
 		}
 	}
 
-	@DeleteMapping("/deleteItems/{items}")
-	public ResponseEntity<String> removeItems(@PathVariable Items items) throws RemoveFailedException {
+	@DeleteMapping("/deleteItems/{itemId}")
+	public ResponseEntity<String> removeItems(@PathVariable Integer itemId) throws RemoveFailedException {
 		logger.info("Inside remove items method");
-		if (items == null) {
+		ItemsDTO item=itemService.viewItemsById(itemId);
+		if (item == null) {
 			throw new RemoveFailedException("delete items failed");
 		}
-		itemService.removeItems(items);
+		itemService.removeItems(itemId);
 		return new ResponseEntity<String>("items deleted", HttpStatus.OK);
 	}
 
-	@GetMapping("/viewAllItemsByCategory/{categoryName}")
+	@GetMapping("/viewAllItemsByCategory/{name}")
 	public List<ItemsDTO> viewAllItemssByCategory(@PathVariable String name) throws IdNotFoundException {
 		logger.info("Inside view items category method");
 		List<ItemsDTO> itemsDto = itemService.viewAllItemssByCategory(name);
-		if (itemsDto.isEmpty()) {
-			throw new IdNotFoundException("item not found");
-		} else {
+		if(itemsDto.isEmpty()) {
+			throw new IdNotFoundException("Item id not found !!!");
+		}
 			return itemsDto;
 		}
-	}
+	
 
-	@GetMapping("/findItemsByRestaurant/{restaurantName}")
+	@GetMapping("/findItemsByRestaurant/{name}")
 	public List<ItemsDTO> findItemssByRestaurant(@PathVariable String name) throws InvalidNameException {
 		logger.info("Inside find item restaurant method");
 		List<ItemsDTO> itemsDto = itemService.findItemssByRestaurant(name);
@@ -90,6 +93,14 @@ public class ItemsController {
 		} else {
 			return itemsDto;
 		}
+	}
+	
+	@GetMapping("/findAllItems")
+	public List<ItemsDTO> findAllItems(){
+		logger.info("Inside find All items");
+		List<ItemsDTO> itemsDto=itemService.findAllItems();
+		return itemsDto;
+		
 	}
 
 }

@@ -1,36 +1,51 @@
 package com.capg.foodonlinedelivery.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+/**
+ * 
+ * @author: venkatesh
+ * Description:Items Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 public class Items {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer itemId;
 	private String itemName;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "category_id")
+	@JoinColumn(name = "category_id")
 	private Category category;
 	private Integer quantity;
 	private double cost;
+	@JsonIgnore
 	@ManyToMany(mappedBy="itemList")
 	private List<FoodCart> cart;
-	@ManyToMany(mappedBy="itemList")
-	private List<Restaurant> restaurantList = new ArrayList<>();
+	@JsonIgnore
+	@ManyToMany(mappedBy="itemList",cascade=CascadeType.ALL)
+	private List<Restaurant> restaurantList;
 
+
+	public List<FoodCart> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<FoodCart> cart) {
+		this.cart = cart;
+	}
 
 	public Items() {
 		super();
@@ -94,6 +109,11 @@ public class Items {
 
 	public void setRestaurantList(List<Restaurant> restaurantList) {
 		this.restaurantList = restaurantList;
+	}
+	@Override
+	public String toString() {
+		return "Items [itemId=" + itemId + ", itemName=" + itemName + ", category=" + category + ", quantity="
+				+ quantity + ", cost=" + cost + ", cart=" + cart + ", restaurantList=" + restaurantList + "]";
 	}
 
 }

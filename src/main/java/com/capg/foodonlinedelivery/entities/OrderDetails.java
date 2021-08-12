@@ -1,9 +1,9 @@
 package com.capg.foodonlinedelivery.entities;
 
 import java.time.LocalDateTime;
-
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +17,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
+/**
+ * 
+ * @author: sumanth
+ * Description:orderDetails Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 @Table(name="order_details")
 public class OrderDetails {
@@ -27,18 +33,15 @@ public class OrderDetails {
 	@SequenceGenerator(name="order_seq",sequenceName="order_seq",allocationSize=1)
 	private int orderId;
 	private LocalDateTime OrderDate;
-	 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="custId")
 	private Customer customer;
-	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="orderItemDetails", joinColumns = { @JoinColumn(name="orderId")},inverseJoinColumns = {@JoinColumn(name="itemId")})
-	List<Items> list;
-	
-	@ManyToOne
+	private List<Items> list;
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="restaurant_id")
-	Restaurant restaurant;
+	private Restaurant restaurant;
 
 	@NotEmpty
 	@Size(min = 4,max=10)

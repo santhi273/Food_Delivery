@@ -11,6 +11,7 @@ public interface IRestaurantService {
 	public List<RestaurantDTO> viewRestaurantByItemName(String name);
 	public List<RestaurantDTO> viewRestaurant();
 	public String removeRestaurantById(Integer restaurantId);
+	public RestaurantDTO viewRestaurantById(Integer restaurantId);
 
 
 }

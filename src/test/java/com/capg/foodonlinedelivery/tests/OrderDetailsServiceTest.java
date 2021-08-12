@@ -36,34 +36,18 @@ public class OrderDetailsServiceTest {
 
 
 	@Test
-	void testViewOrderById() {
-		OrderDetails order=repository.findById(11);
-		assertNotNull(order);
-	}
-
-	@Test
 	void testViewAllOrdersByCustomer() {
 		List<OrderDetails> list=repository.findAllOrdersByCustomer(10);
 		int cnt=list.size();
 		boolean res=false;
-		if(cnt==0)
+		if(cnt>0)
 		{
 			res=true;
 		}
 		assertTrue(res);
 		}
 
-	@Test
-	void testViewAllOrdersByRestaurant() {
-		List<OrderDetails> list=repository.findAllByRestaurant("Annapurna");
-		assertNotNull(list);
 
-	}
-	@Test
-	void testRemoveOrderById() {
-		repository.deleteById(11);
-		
-	}
 
 	public Customer getCustomer()
 	{

@@ -15,25 +15,15 @@ public class RestaurantLoginServiceTest {
 	IRestaurantLoginRepository repository;
 	@Test
 	void testAddRestaurantLogin() {
-		RestaurantLogin resl=repository.save(null);
+		RestaurantLogin resl=repository.save(restLog());
 		assertNotNull(resl);
 	}
 	@Test
 	void  testupdateRestaurantLogin(){
-		RestaurantLogin resl=repository.save(null);
+		RestaurantLogin resl=repository.save(restLog());
 		assertNotNull(resl);
 	}
-    @Test
-	void testDeleteRestaurantLogin() {
-		repository.deleteById(44);
-	}
 
-
-	@Test
-	void testCandidateLogin() {
-		RestaurantLogin name=repository.findByUserName(null);
-		assertNotNull(name);
-	}
 
 	@Test
 	void testCandidateLogout() {

@@ -13,17 +13,26 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+/**
+ * 
+ * @author: santhi
+ * Description:foodCart Entity
+ * date: 3/6/2021
+ *
+ */
 @Entity
 public class FoodCart {
 	@Id
 	@GeneratedValue(generator = "FoodCart_sequence", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "FoodCart_sequence", sequenceName = "FoodCart_sequence", allocationSize = 1)
 	private Integer cartId;
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="foodcart_items",joinColumns=@JoinColumn(name="foodcart_id"),inverseJoinColumns=@JoinColumn(name="items_id"))
 	private List<Items> itemList;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "customer_id")
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	public FoodCart() {

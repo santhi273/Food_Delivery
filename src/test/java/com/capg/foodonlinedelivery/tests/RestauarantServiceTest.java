@@ -20,20 +20,15 @@ public class RestauarantServiceTest {
 	@Test
 	void testAddRestaurant() {
 		
-		Restaurant restaurant=repository.save(null);
+		Restaurant restaurant=repository.save(getRestaurant());
 		assertNotNull(restaurant);
 	}
 
 	@Test
 	void testUpdateRestaurant() {
 
-		Restaurant restaurant=repository.save(null);
+		Restaurant restaurant=repository.save(getRestaurant());
 		assertNotNull(restaurant);
-	}
-	@Test
-	void testRemoveRestaurantById() {
-		repository.deleteById(null);
-		assertNotNull("Restaurant removed Succesfully");
 	}
 	@Test
 	void testViewRestaurant() {

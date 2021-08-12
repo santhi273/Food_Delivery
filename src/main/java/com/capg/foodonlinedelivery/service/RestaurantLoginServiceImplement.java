@@ -1,12 +1,21 @@
 package com.capg.foodonlinedelivery.service;
 
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capg.foodonlinedelivery.entities.RestaurantLogin;
 import com.capg.foodonlinedelivery.repository.IRestaurantLoginRepository;
+/**
+ * 
+ * @author: hemalatha
+ * Description:Restaurant login implementation  
+ * date: 7/6/2021
+ * param:restaurant login entity
+ * 
+ */
 @Service
 public class RestaurantLoginServiceImplement implements IRestaurantLoginService  {
 
@@ -15,7 +24,14 @@ public class RestaurantLoginServiceImplement implements IRestaurantLoginService 
 	
 	Logger logger=LoggerFactory.getLogger(RestaurantLoginServiceImplement.class);
 
-	
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:add Restaurant login  
+	 * date: 7/6/2021
+	 * param:restaurant login entity
+	 * return: retaurantLogin
+	 */
 	@Override
 	public RestaurantLogin addRestaurantLogin(RestaurantLogin login) {
 
@@ -23,17 +39,31 @@ public class RestaurantLoginServiceImplement implements IRestaurantLoginService 
 		repository.save(login);
 		return login;
 	}
-
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:delete Restaurant login  
+	 * date: 7/6/2021
+	 * param:restaurant login entity
+	 * return: list<retaurantLogin>
+	 */
 	
 	@Override
-	public List<RestaurantLogin> deleteRestaurantLogin(int userid) {
+	public void deleteRestaurantLogin(int userid) {
 		
 		logger.info("Inside service delete restaurant login method");
 		RestaurantLogin login = repository.findById(userid).orElse(null);
 		repository.deleteById(userid);
-		return repository.findAll();
+		//return repository.findAll();
 	}
-
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:candidate login  
+	 * date: 7/6/2021
+	 * param:restaurant login entity
+	 * return: string
+	 */
 	
 	@Override
 	public String candidateLogin(String username, String password) {
@@ -61,7 +91,14 @@ public class RestaurantLoginServiceImplement implements IRestaurantLoginService 
 		}
 	}
 
-	
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:update Restaurant login  
+	 * date: 7/6/2021
+	 * param:restaurant login entity
+	 * return: retaurantLogin
+	 */
 	@Override
 	public RestaurantLogin updateRestaurantLogin(RestaurantLogin login) {
 
@@ -69,7 +106,14 @@ public class RestaurantLoginServiceImplement implements IRestaurantLoginService 
 		repository.save(login);
 		return login;
 	}
-
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:candiatelogout  
+	 * date: 7/6/2021
+	 * param:restaurant login entity
+	 * return: string
+	 */
 	
 	@Override
 	public String candidateLogout() {

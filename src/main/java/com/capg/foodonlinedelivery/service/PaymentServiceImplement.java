@@ -1,7 +1,6 @@
 package com.capg.foodonlinedelivery.service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,20 +13,37 @@ import com.capg.foodonlinedelivery.entities.Items;
 import com.capg.foodonlinedelivery.entities.OrderDetails;
 import com.capg.foodonlinedelivery.entities.Payment;
 import com.capg.foodonlinedelivery.model.PaymentDTO;
+import com.capg.foodonlinedelivery.repository.IOrderRepository;
 import com.capg.foodonlinedelivery.repository.IPaymentRepository;
 import com.capg.foodonlinedelivery.utils.PaymentUtils;
-
+/**
+ * 
+ * @author: hemalatha
+ * Description:payment service Implementation 
+ * date: 7/6/2021
+ * param:payment entity
+ * 
+ */
 @Service
 public class PaymentServiceImplement implements IPaymentService {
 	@Autowired
 	IPaymentRepository repository;
+	@Autowired
+	IOrderRepository orderRepository;
 	FoodCart foodcart;
 	Logger logger=LoggerFactory.getLogger(PaymentServiceImplement.class);
-
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:add payment  
+	 * date: 7/6/2021
+	 * param:payment entity
+	 * return paymentDTO
+	 */
 	@Override
-	public PaymentDTO addPayment(OrderDetails order) {
+	public PaymentDTO addPayment(Integer orderId) {
 		logger.info("Inside service add payment method");
-
+		OrderDetails order=orderRepository.getById(orderId);
 		Payment payment=new Payment();
 		List<Items> list=order.getList();
 		int totalItems=list.size();
@@ -43,42 +59,60 @@ public class PaymentServiceImplement implements IPaymentService {
        Payment payment1=repository.save(payment);
         return PaymentUtils.convertToPaymentDto(payment1);
 	}
-
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:UPDATE payment  
+	 * date: 7/6/2021
+	 * param:payment entity
+	 * return paymentDTO
+	 */
 	@Override
 	public PaymentDTO updatePayment(Payment payment) {
 		logger.info("Inside service update payment method");
         Payment payment1 = repository.save(payment);
 		return  PaymentUtils.convertToPaymentDto(payment1);
 	}
-
-	@Override
-	public void removePayment(Payment payment) {
-		logger.info("Inside service remove payment method");
-		repository.delete(payment);
-	}
+	
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:view payment  
+	 * date: 7/6/2021
+	 * param:payment entity
+	 * return paymentDTO
+	 */
    @Override
 	public PaymentDTO viewPaymentById(Integer paymentId) {
 		logger.info("Inside service view payment By Id method");
 		Payment payment1 = repository.findById(paymentId).orElse(null);
+		if(payment1==null) {
+			return null;
+		}
 		return PaymentUtils.convertToPaymentDto(payment1);
 	}
-
+   /**
+	 * 
+	 * @author: hemalatha
+	 * Description:add payment  
+	 * date: 7/6/2021
+	 * param:payment entity
+	 * return: list<paymentDTO>
+	 */
 	@Override
 	public List<PaymentDTO> viewPaymentByCustomerId(int customerId) {
 		logger.info("Inside service view payment by customer Id method");
 		List<Payment> list = repository.findByOrderCustomerCustomerId(customerId);
 		return PaymentUtils.convertToPaymentDtoList(list);
 	}
-
-	@Override
-	public List<PaymentDTO> viewPayment(LocalDate startDate, LocalDate endDate) {
-		logger.info("Inside service view payment by LocalDate method");
-		LocalDateTime startDateTime = startDate.atTime(0, 0, 0);
-		LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
-		List<Payment> payment = repository.findByPaymentDates(startDateTime, endDateTime);
-		return PaymentUtils.convertToPaymentDtoList(payment);
-	}
-
+	/**
+	 * 
+	 * @author: hemalatha
+	 * Description:total cost  
+	 * date: 7/6/2021
+	 * param:payment entity
+	 * return: Double
+	 */
 	@Override
 	public Double calculateTotalCost(Payment payment) {
 		logger.info("Inside service calculate total cost method");
